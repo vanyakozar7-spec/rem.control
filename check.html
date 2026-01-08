@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sprawdź swój remont — Remont Control</title>
+  <meta name="description" content="Wypełnij krótki formularz. Uporządkujemy zakres i przygotujemy plan kontroli." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">Remont Control</a>
+    <nav class="menu">
+      <a href="about.html">O serwisie</a>
+      <a href="terms.html">Zasady</a>
+      <a class="btn" href="check.html">Sprawdź swój remont</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="card">
+      <h1 class="h1">Sprawdź swój remont</h1>
+      <p class="lead">
+        Odpowiedz na kilka pytań (3–5 minut). Przygotujemy uporządkowany zakres i plan kontroli.
+      </p>
+      <p class="small">
+        To nie jest dokładna wycena — pokazujemy widełki i strukturę.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="card">
+
+      <!-- FORM (Formspree) -->
+      <form
+  method="POST"
+  action="https://formspree.io/f/xnjneyye"
+  class="form"
+>
+
+  <div class="form-row">
+    <div>
+      <label>Imię</label>
+      <input class="input" type="text" name="name" placeholder="np. Jan" />
+    </div>
+    <div>
+      <label>E-mail (wymagane)</label>
+      <input class="input" type="email" name="email" required placeholder="np. jan@mail.com" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div>
+      <label>Miasto / województwo</label>
+      <input class="input" type="text" name="location" placeholder="np. Wrocław / Dolnośląskie" />
+    </div>
+    <div>
+      <label>Metraż (m²)</label>
+      <input class="input" type="number" name="area" placeholder="np. 52" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div>
+      <label>Stan mieszkania</label>
+      <select class="input" name="condition">
+        <option value="deweloperski">Deweloperski</option>
+        <option value="wtorny">Rynek wtórny</option>
+      </select>
+    </div>
+    <div>
+      <label>Standard</label>
+      <select class="input" name="standard">
+        <option value="basic">Basic</option>
+        <option value="comfort">Comfort</option>
+        <option value="premium">Premium</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div>
+      <label>Termin</label>
+      <select class="input" name="timing">
+        <option value="pilnie">Pilnie (1–4 tygodnie)</option>
+        <option value="normalnie">Normalnie (1–3 miesiące)</option>
+        <option value="bez-pospiechu">Bez pośpiechu</option>
+      </select>
+    </div>
+    <div>
+      <label>Telefon (opcjonalnie)</label>
+      <input class="input" type="text" name="phone" placeholder="+48 ..." />
+    </div>
+  </div>
+
+  <label>Opis własnymi słowami</label>
+  <textarea
+    class="input"
+    name="description"
+    placeholder="Np. malowanie, podłogi, łazienka, elektryka…"
+  ></textarea>
+
+  <!-- FORM SETTINGS -->
+  <input type="hidden" name="_next" value="thank-you.html" />
+  <input type="hidden" name="_subject" value="Nowe zgłoszenie — Remont Control" />
+  <input type="hidden" name="_template" value="table" />
+
+  <p style="margin-top:16px;">
+    <button class="btn" type="submit">Wyślij zgłoszenie</button>
+    <a class="btn secondary" href="terms.html" style="margin-left:10px;">Zasady</a>
+  </p>
+
+  <p class="small" style="margin-top:10px;">
+    Wysyłając formularz akceptujesz zasady korzystania. Dane używamy wyłącznie do odpowiedzi.
+  </p>
+
+</form>
+      <!-- /FORM -->
+
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p class="small">
+      Remont Control to serwis informacyjno-kontrolny. Nie jesteśmy stroną umowy i nie gwarantujemy kosztu ani rezultatu prac.
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

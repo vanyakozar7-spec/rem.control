@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sprawdź swój remont — Remont Control</title>
-  <meta name="description" content="Wypełnij krótki formularz. Uporządkujemy zakres i przygotujemy plan kontroli." />
+  <meta name="description" content="Wypełnij krótki formularz (3–5 minut). Uporządkujemy zakres, etapy i przygotujemy plan kontroli." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -21,14 +21,17 @@
 </header>
 
 <main class="container">
+
   <section class="hero">
     <div class="card">
-      <h1 class="h1">Sprawdź swój remont</h1>
+      <div class="badge">Bez rejestracji • 3–5 minut • Odpowiedź w 24h robocze</div>
+      <h1 class="h1" style="margin-top:12px;">Sprawdź swój remont</h1>
       <p class="lead">
-        Odpowiedz na kilka pytań (3–5 minut). Przygotujemy uporządkowany zakres i plan kontroli.
+        Odpowiedz na kilka pytań. Przygotujemy uporządkowany zakres, etapy i plan kontroli — tak, żeby było jasno
+        „co wchodzi”, „co po czym” i gdzie najczęściej pojawiają się dopłaty.
       </p>
       <p class="small">
-        To nie jest dokładna wycena — pokazujemy widełki i strukturę.
+        To nie jest dokładna wycena — pokazujemy widełki i strukturę. Widełki zależą od miasta, metrażu, stanu i standardu.
       </p>
     </div>
   </section>
@@ -39,17 +42,18 @@
       <!-- FORM (FormSubmit) -->
       <form method="POST" action="https://formsubmit.co/vanyakozar7@gmail.com" class="form">
 
-        <!-- SETTINGS -->
+        <!-- SETTINGS (Twoje) -->
         <input type="hidden" name="_subject" value="Nowe zgłoszenie — Remont Control" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://vanyakozar7-spec.github.io/rem.control/thank-you.html" />
 
-        <!-- Redirect po wysłaniu (ważne: tu wstawiamy pełny URL strony) -->
-        <input type="hidden" name="_next" value="https://vanyakozar7-spec.github.io/rem.control/thank-you.html">
+        <!-- 1) Kontakt -->
+        <h2 class="h2" style="margin-bottom:10px;">1) Kontakt</h2>
 
         <div class="form-row">
           <div>
-            <label>Imię</label>
+            <label>Imię (opcjonalnie)</label>
             <input class="input" type="text" name="Imię" placeholder="np. Jan" />
           </div>
           <div>
@@ -60,12 +64,32 @@
 
         <div class="form-row">
           <div>
+            <label>Telefon (opcjonalnie)</label>
+            <input class="input" type="text" name="Telefon" placeholder="+48 ..." />
+          </div>
+          <div>
+            <label>Preferowana forma kontaktu</label>
+            <select class="input" name="Kontakt preferowany">
+              <option value="E-mail" selected>E-mail</option>
+              <option value="Telefon">Telefon</option>
+              <option value="WhatsApp">WhatsApp</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="height:16px;"></div>
+
+        <!-- 2) Podstawy -->
+        <h2 class="h2" style="margin-bottom:10px;">2) Mieszkanie i etap</h2>
+
+        <div class="form-row">
+          <div>
             <label>Miasto / województwo</label>
             <input class="input" type="text" name="Miasto / województwo" placeholder="np. Wrocław / Dolnośląskie" />
           </div>
           <div>
             <label>Metraż (m²)</label>
-            <input class="input" type="number" name="Metraż (m²)" placeholder="np. 52" />
+            <input class="input" type="number" name="Metraż (m²)" min="10" max="500" placeholder="np. 52" />
           </div>
         </div>
 
@@ -78,36 +102,117 @@
             </select>
           </div>
           <div>
-            <label>Standard</label>
-            <select class="input" name="Standard">
-              <option value="Basic">Basic</option>
-              <option value="Comfort">Comfort</option>
-              <option value="Premium">Premium</option>
+            <label>Etap remontu</label>
+            <select class="input" name="Etap remontu">
+              <option value="Planuję (przed startem)" selected>Planuję (przed startem)</option>
+              <option value="Jest oferta/wykonawca — chcę uporządkować zakres">Jest oferta/wykonawca — chcę uporządkować zakres</option>
+              <option value="W trakcie — pojawiły się dopłaty/problemy">W trakcie — pojawiły się dopłaty/problemy</option>
+              <option value="Po części prac — chcę sprawdzić jakość/zakres">Po części prac — chcę sprawdzić jakość/zakres</option>
             </select>
           </div>
         </div>
 
         <div class="form-row">
           <div>
-            <label>Termin</label>
-            <select class="input" name="Termin">
-              <option value="Pilnie (1–4 tygodnie)">Pilnie (1–4 tygodnie)</option>
-              <option value="Normalnie (1–3 miesiące)">Normalnie (1–3 miesiące)</option>
-              <option value="Bez pośpiechu">Bez pośpiechu</option>
+            <label>Standard</label>
+            <select class="input" name="Standard">
+              <option value="Basic">Basic</option>
+              <option value="Comfort" selected>Comfort</option>
+              <option value="Premium">Premium</option>
             </select>
           </div>
           <div>
-            <label>Telefon (opcjonalnie)</label>
-            <input class="input" type="text" name="Telefon" placeholder="+48 ..." />
+            <label>Termin</label>
+            <select class="input" name="Termin">
+              <option value="Pilnie (1–4 tygodnie)">Pilnie (1–4 tygodnie)</option>
+              <option value="Normalnie (1–3 miesiące)" selected>Normalnie (1–3 miesiące)</option>
+              <option value="Bez pośpiechu">Bez pośpiechu</option>
+            </select>
           </div>
         </div>
 
-        <label>Opis własnymi słowami</label>
+        <div style="height:16px;"></div>
+
+        <!-- 3) Zakres (szybkie kliknięcia) -->
+        <h2 class="h2" style="margin-bottom:10px;">3) Zakres prac (zaznacz co dotyczy)</h2>
+        <p class="small" style="margin-top:-6px;">
+          To pomaga nam szybciej poukładać zakres i ryzyka. Jeśli nie wiesz — zostaw puste.
+        </p>
+
+        <div class="card" style="padding:14px;">
+          <div class="grid2" style="gap:10px;">
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Demontaż / skuwanie" />
+              Demontaż / skuwanie
+            </label>
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Ściany / gładzie / malowanie" />
+              Ściany / gładzie / malowanie
+            </label>
+
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Podłogi / panele / deska" />
+              Podłogi / panele / deska
+            </label>
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Łazienka (płytki / hydraulika)" />
+              Łazienka (płytki / hydraulika)
+            </label>
+
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Kuchnia (montaż / podłączenia)" />
+              Kuchnia (montaż / podłączenia)
+            </label>
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Elektryka" />
+              Elektryka
+            </label>
+
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Drzwi / listwy / stolarka" />
+              Drzwi / listwy / stolarka
+            </label>
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Inne / nie wiem" />
+              Inne / nie wiem
+            </label>
+          </div>
+        </div>
+
+        <div style="height:16px;"></div>
+
+        <!-- 4) Opis (minimalny) -->
+        <h2 class="h2" style="margin-bottom:10px;">4) Krótki opis</h2>
+
+        <label>Opis własnymi słowami (opcjonalnie, ale pomaga)</label>
         <textarea
           class="input"
           name="Opis"
-          placeholder="Np. malowanie, podłogi, łazienka, elektryka…"
+          placeholder="Np. mieszkanie z rynku wtórnego, łazienka i kuchnia do zrobienia, chcę zrozumieć zakres i widełki. Jeśli masz już ofertę — wklej, co jest w cenie."
+          rows="5"
         ></textarea>
+
+        <label>Masz ofertę od wykonawcy? (opcjonalnie)</label>
+        <select class="input" name="Oferta od wykonawcy">
+          <option value="Nie" selected>Nie</option>
+          <option value="Tak — mam ofertę/kosztorys">Tak — mam ofertę/kosztorys</option>
+          <option value="Tak — mam tylko ustalenia słowne">Tak — mam tylko ustalenia słowne</option>
+        </select>
+
+        <p class="small" style="margin-top:10px;">
+          Zdjęcia/projekt: nie dodajemy plików do formularza (żeby było szybciej).
+          Po wysłaniu zgłoszenia możesz odpisać na e-mail i dołączyć zdjęcia lub PDF projektu — przyspieszy to analizę.
+        </p>
+
+        <div style="height:16px;"></div>
+
+        <!-- ZGODA -->
+        <div class="card" style="padding:14px;">
+          <label class="small" style="display:flex; gap:10px; align-items:flex-start;">
+            <input type="checkbox" name="Zgoda" required />
+            Wyrażam zgodę na kontakt w sprawie zgłoszenia i przetwarzanie danych wyłącznie w celu przygotowania odpowiedzi (zgodnie z zasadami serwisu).
+          </label>
+        </div>
 
         <p style="margin-top:16px;">
           <button class="btn" type="submit">Wyślij zgłoszenie</button>
@@ -115,7 +220,7 @@
         </p>
 
         <p class="small" style="margin-top:10px;">
-          Wysyłając formularz akceptujesz zasady korzystania. Dane używamy wyłącznie do odpowiedzi.
+          Dane wykorzystujemy wyłącznie do odpowiedzi na zgłoszenie. Możesz poprosić o usunięcie danych w dowolnym momencie.
         </p>
 
       </form>
@@ -134,7 +239,6 @@
 </footer>
 
 </body>
-</html>
 </html>
 
 

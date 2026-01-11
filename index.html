@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Remont Control — remont bez chaosu</title>
-  <meta name="description" content="Niezależna struktura i kontrola remontu: zakres prac, widełki kosztów, etapy i checklisty jakości. PDF dla klienta i wykonawcy." />
+  <title>Remont Control — uporządkuj zakres, koszty i kontrolę remontu</title>
+  <meta name="description" content="Uporządkuj zakres prac, budżet w widełkach i kontrolę jakości przed startem remontu. PDF dla klienta i wykonawcy + checklisty i etapy." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -15,142 +15,231 @@
     <nav class="menu">
       <a href="about.html">O serwisie</a>
       <a href="terms.html">Zasady</a>
-      <a class="btn" href="check.html">Sprawdź swój remont</a>
+      <a class="btn" href="check.html">Sprawdź zakres i koszty</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
+
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-grid">
       <div class="card">
-        <div class="badge">Niezależnie • spokojnie • praktycznie</div>
-        <h1 class="h1">Remont bez chaosu. Pod kontrolą — zanim zaczniesz prace.</h1>
+        <div class="badge">Prosto • bez stresu • bez lania wody</div>
+
+        <h1 class="h1">Remont w Polsce? Najpierw uporządkuj zakres, koszty i kontrolę jakości.</h1>
+
         <p class="lead">
-          Niezależny serwis, który pomaga uporządkować zakres prac, zrozumieć budżet w widełkach i kontrolować jakość — nawet jeśli nie jesteś fachowcem.
+          Jeśli nie jesteś fachowcem — łatwo przepłacić, nie dopilnować jakości i wejść w konflikt z wykonawcą.
+          My pomagamy poukładać remont <strong>zanim zaczniesz prace</strong>: co wchodzi w zakres, w jakiej kolejności i jaki budżet jest realny (w widełkach).
         </p>
-        <a class="btn" href="check.html">Sprawdź swój remont</a>
-        <div class="kicker">Bez rejestracji • 3–5 minut • Widełki cenowe, nie „dokładna wycena”</div>
+
+        <a class="btn" href="check.html">Sprawdź zakres i koszty</a>
+        <div class="kicker">Bez rejestracji • 3–5 minut • Odpowiedź w 24h robocze • Widełki, nie „cena co do złotówki”</div>
       </div>
 
       <div class="card">
         <h2 class="h2">Co dostajesz</h2>
         <ul class="list">
-          <li>PDF dla klienta (plan + kontrola)</li>
-          <li>PDF dla wykonawcy (uporządkowany zakres)</li>
+          <li>PDF dla klienta: zakres + etapy + kontrola</li>
+          <li>PDF dla wykonawcy: uporządkowany zakres do ustaleń</li>
+          <li>Widełki budżetu (orientacyjnie, rynkowo)</li>
           <li>Checklisty jakości (PLUS / PREMIUM)</li>
-          <li>Etapy i kolejność prac</li>
-          <li>Wskazówki do rozmowy i ustaleń</li>
+          <li>Wskazówki: jak pytać i co ustalić, żeby uniknąć „niespodzianek”</li>
         </ul>
       </div>
     </div>
   </section>
 
+  <!-- DLA KOGO / NIE DLA KOGO (filtr = lepsze leady) -->
+  <section class="section">
+    <div class="card">
+      <h2 class="h2">Dla kogo to jest?</h2>
+      <div class="grid2">
+        <div>
+          <ul class="list">
+            <li><strong>Dla klientów</strong>, którzy robią remont mieszkania i chcą mieć kontrolę</li>
+            <li>Dla osób bez wiedzy technicznej: „chcę rozumieć, za co płacę”</li>
+            <li>Dla tych, którzy chcą jasno ustalić zakres <em>przed</em> startem</li>
+          </ul>
+        </div>
+        <div>
+          <ul class="list">
+            <li><strong>Nie dla</strong> osób szukających „najtańszej opcji za wszelką cenę”</li>
+            <li>Nie robimy wyceny „co do złotówki” i nie zastępujemy nadzoru budowlanego</li>
+            <li>Nie polecamy ekip — porządkujemy ustalenia po Twojej stronie</li>
+          </ul>
+        </div>
+      </div>
+      <p class="notice" style="margin-top:12px;">
+        Cel jest prosty: mniej chaosu, mniej dopłat „w trakcie”, mniej konfliktów — więcej jasnych ustaleń.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
   <section class="section">
     <div class="card">
       <h2 class="h2">Znasz to?</h2>
       <ul class="list">
-        <li>kosztorys rośnie „w trakcie”</li>
-        <li>nie wiadomo, co dokładnie jest w cenie</li>
-        <li>„tak się robi” bez wyjaśnień</li>
-        <li>trudno ocenić jakość prac</li>
+        <li>koszty rosną „w trakcie”, bo zakres był niejasny</li>
+        <li>nie wiadomo, co dokładnie jest w cenie, a co jest „dodatkowo”</li>
+        <li>wykonawca mówi: „tak się robi” — bez konkretów</li>
+        <li>trudno ocenić jakość prac, jeśli nie masz doświadczenia</li>
         <li>klient i wykonawca mówią różnymi językami</li>
       </ul>
     </div>
   </section>
 
+  <!-- SOLUTION -->
   <section class="section">
     <div class="card">
       <h2 class="h2">Wprowadzamy porządek w remoncie</h2>
       <p class="small">
-        Nie wykonujemy remontów i nie sprzedajemy ekip. Tworzymy strukturę, kontrolę i jasne ustalenia między klientem a wykonawcą.
+        Nie wykonujemy remontów i nie sprzedajemy ekip. Dajemy strukturę: jasny zakres, logikę etapów i proste narzędzia kontroli,
+        żebyś mógł podejmować decyzje świadomie.
       </p>
       <ul class="list">
-        <li>czytelny zakres prac</li>
-        <li>orientacyjny budżet w widełkach rynkowych</li>
-        <li>logika etapów remontu</li>
-        <li>checklisty kontroli jakości</li>
-        <li>dokument zrozumiały dla obu stron</li>
+        <li>czytelny zakres prac (co ma być zrobione)</li>
+        <li>orientacyjny budżet w widełkach rynkowych (co jest realne)</li>
+        <li>logika etapów i kolejność prac (co po czym)</li>
+        <li>checklisty kontroli jakości (na co patrzeć)</li>
+        <li>dokument zrozumiały dla obu stron (mniej konfliktów)</li>
       </ul>
     </div>
   </section>
 
+  <!-- HOW IT WORKS -->
   <section class="section">
     <div class="card">
       <h2 class="h2">Jak to działa</h2>
       <ol class="list">
-        <li>Opisujesz mieszkanie i plan remontu (3–5 minut)</li>
-        <li>Porządkujemy zakres i doprecyzowujemy szczegóły</li>
-        <li>Widzisz etapy oraz widełki kosztów</li>
-        <li>Otrzymujesz dokumenty i narzędzia kontroli</li>
+        <li>Wypełniasz formularz (3–5 minut): mieszkanie, zakres, standard</li>
+        <li>Porządkujemy informacje i – jeśli trzeba – dopytujemy o szczegóły</li>
+        <li>Dostajesz etapy i widełki kosztów + ryzyka i „pułapki”</li>
+        <li>Otrzymujesz PDF-y i narzędzia kontroli (w zależności od pakietu)</li>
       </ol>
+
       <p style="margin-top:14px;">
-        <a class="btn" href="check.html">Zacznij</a>
-        <a class="btn secondary" href="about.html" style="margin-left:10px;">O serwisie</a>
+        <a class="btn" href="check.html">Sprawdź zakres i koszty</a>
+        <a class="btn secondary" href="about.html" style="margin-left:10px;">Jak pomagamy?</a>
+      </p>
+
+      <p class="small" style="margin-top:10px;">
+        Uwaga: widełki są orientacyjne — zależą od miasta, metrażu, stanu i standardu wykończenia.
       </p>
     </div>
   </section>
 
+  <!-- DLA KLIENTÓW / DLA WYKONAWCÓW -->
   <section class="section">
     <div class="grid2">
       <div class="card">
         <h2 class="h2">Dla klientów</h2>
-        <p class="small">Dla osób, które robią remont pierwszy raz, chcą rozumieć za co płacą i uniknąć „niespodzianek”.</p>
+        <p class="small">
+          Dla osób, które chcą rozumieć, co jest w zakresie, jak pilnować jakości i jak rozmawiać z wykonawcą bez stresu.
+        </p>
       </div>
       <div class="card">
         <h2 class="h2">Dla wykonawców</h2>
-        <p class="small">Dla ekip, które cenią jasny zakres, mniej chaosu i mniej konfliktów w trakcie.</p>
+        <p class="small">
+          Dla ekip, które wolą jasny zakres i mniej chaosu. Dokument pomaga ustalić „co robimy” i ograniczyć poprawki „w trakcie”.
+        </p>
       </div>
     </div>
   </section>
 
+  <!-- PACKAGES -->
   <section class="section">
     <div class="card">
-      <h2 class="h2">Pakiety</h2>
+      <h2 class="h2">Pakiety (prosto i jasno)</h2>
+
       <div class="grid3">
         <div class="card">
           <h3 class="h2" style="font-size:18px;margin-bottom:6px;">BASIC</h3>
-          <p class="small">Orientacja i struktura: zakres prac + widełki kosztów + etapy + PDF do porównania ofert.</p>
+          <p class="small">
+            Zakres + etapy + widełki kosztów.<br/>
+            PDF dla klienta do porównania ofert i rozmowy z wykonawcą.
+          </p>
+          <ul class="list">
+            <li>Zakres prac</li>
+            <li>Etapy i kolejność</li>
+            <li>Widełki budżetu</li>
+          </ul>
         </div>
+
         <div class="card">
-          <div class="badge">Rekomendowany</div>
+          <div class="badge">Najczęściej wybierany</div>
           <h3 class="h2" style="font-size:18px;margin:10px 0 6px;">PLUS</h3>
-          <p class="small">Kontrola i checklisty: wszystko z BASIC + checklisty jakości + wersja dla wykonawcy + ryzyka i pułapki.</p>
+          <p class="small">
+            Kontrola i checklisty: mniej ryzyka i „niespodzianek”.<br/>
+            Dodatkowo wersja dla wykonawcy.
+          </p>
+          <ul class="list">
+            <li>Wszystko z BASIC</li>
+            <li>Checklisty jakości</li>
+            <li>PDF dla wykonawcy</li>
+            <li>Ryzyka i typowe pułapki</li>
+          </ul>
         </div>
+
         <div class="card">
           <h3 class="h2" style="font-size:18px;margin-bottom:6px;">PREMIUM</h3>
-          <p class="small">Spokój pod kontrolą: wszystko z PLUS + zdalne konsultacje w kluczowych momentach i pomoc w zmianach w trakcie.</p>
+          <p class="small">
+            Spokój pod kontrolą: wsparcie w kluczowych momentach i przy zmianach w trakcie.
+          </p>
+          <ul class="list">
+            <li>Wszystko z PLUS</li>
+            <li>Zdalne konsultacje</li>
+            <li>Pomoc przy zmianach</li>
+          </ul>
         </div>
       </div>
+
       <p style="margin-top:14px;">
-        <a class="btn" href="check.html">Sprawdź swój remont</a>
+        <a class="btn" href="check.html">Sprawdź zakres i koszty</a>
+      </p>
+
+      <p class="small" style="margin-top:10px;">
+        Pakiet dobierzesz po formularzu — najpierw zbieramy informacje, potem dopasowujemy najlepszą opcję.
       </p>
     </div>
   </section>
 
+  <!-- LIMITATIONS (trust) -->
   <section class="section">
     <div class="card">
-      <h2 class="h2">Nie obiecujemy niemożliwego</h2>
+      <h2 class="h2">Mówimy wprost</h2>
       <ul class="list">
-        <li>nie podajemy „dokładnej ceny co do złotówki”</li>
+        <li>nie podajemy „dokładnej ceny co do złotówki” — tylko realne widełki</li>
         <li>nie zastępujemy umowy ani nadzoru technicznego</li>
-        <li>nie odpowiadamy za pracę wykonawcy</li>
+        <li>nie odpowiadamy za pracę wykonawcy — pomagamy Ci mieć jasne ustalenia</li>
       </ul>
-      <p class="notice" style="margin-top:12px;">Dajemy strukturę, kontrolę i jasne ustalenia — to zmniejsza ryzyko i stres.</p>
+      <p class="notice" style="margin-top:12px;">
+        Największe oszczędności w remoncie to nie „zniżki”, tylko brak chaosu, dopłat i poprawek.
+      </p>
     </div>
   </section>
 
+  <!-- FINAL CTA -->
   <section class="section">
     <div class="card">
-      <h2 class="h2">Lepiej 5 minut kontroli dziś niż miesiące nerwów później</h2>
-      <a class="btn" href="check.html">Sprawdź swój remont</a>
+      <h2 class="h2">Lepiej 5 minut dziś niż miesiące nerwów później</h2>
+      <p class="small">Wypełnij formularz i zobacz, co warto doprecyzować zanim ruszysz z pracami.</p>
+      <a class="btn" href="check.html">Sprawdź zakres i koszty</a>
+      <div class="kicker" style="margin-top:10px;">Bez rejestracji • 3–5 minut • Odpowiedź w 24h robocze</div>
     </div>
   </section>
+
 </main>
 
 <footer class="footer">
   <div class="container">
-    <p class="small">Remont Control to serwis informacyjno-kontrolny. Nie jesteśmy stroną umowy i nie gwarantujemy kosztu ani rezultatu prac.</p>
+    <p class="small">
+      Remont Control to serwis informacyjno-kontrolny. Nie jesteśmy stroną umowy i nie gwarantujemy kosztu ani rezultatu prac.
+      Widełki są orientacyjne i zależą od wielu czynników (miasto, metraż, stan, standard).
+    </p>
     <p class="small" style="margin-top:8px;">
       <a href="about.html">O serwisie</a> • <a href="terms.html">Zasady</a>
     </p>

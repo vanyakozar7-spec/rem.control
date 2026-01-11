@@ -11,7 +11,7 @@
 
 <header class="nav">
   <div class="container nav-inner">
-    <a class="brand" href="index.html">Remont Control</a>
+    <a class="brand" href="./">Remont Control</a>
     <nav class="menu">
       <a href="about.html">O serwisie</a>
       <a href="terms.html">Zasady</a>
@@ -36,90 +36,89 @@
   <section class="section">
     <div class="card">
 
-      <!-- FORM (Formspree) -->
-      <form
-  method="POST"
-  action="https://formspree.io/f/xnjneyye"
-  class="form"
->
+      <!-- FORM (FormSubmit) -->
+      <form method="POST" action="https://formsubmit.co/vanyakozar7@gmail.com" class="form">
 
-  <div class="form-row">
-    <div>
-      <label>Imię</label>
-      <input class="input" type="text" name="name" placeholder="np. Jan" />
-    </div>
-    <div>
-      <label>E-mail (wymagane)</label>
-      <input class="input" type="email" name="email" required placeholder="np. jan@mail.com" />
-    </div>
-  </div>
+        <!-- SETTINGS -->
+        <input type="hidden" name="_subject" value="Nowe zgłoszenie — Remont Control" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
 
-  <div class="form-row">
-    <div>
-      <label>Miasto / województwo</label>
-      <input class="input" type="text" name="location" placeholder="np. Wrocław / Dolnośląskie" />
-    </div>
-    <div>
-      <label>Metraż (m²)</label>
-      <input class="input" type="number" name="area" placeholder="np. 52" />
-    </div>
-  </div>
+        <!-- Redirect po wysłaniu (ważne: tu wstawiamy pełny URL strony) -->
+        <input type="hidden" name="_next" value="https://vanyakozar7-spec.github.io/controlremont/thank-you.html" />
 
-  <div class="form-row">
-    <div>
-      <label>Stan mieszkania</label>
-      <select class="input" name="condition">
-        <option value="deweloperski">Deweloperski</option>
-        <option value="wtorny">Rynek wtórny</option>
-      </select>
-    </div>
-    <div>
-      <label>Standard</label>
-      <select class="input" name="standard">
-        <option value="basic">Basic</option>
-        <option value="comfort">Comfort</option>
-        <option value="premium">Premium</option>
-      </select>
-    </div>
-  </div>
+        <div class="form-row">
+          <div>
+            <label>Imię</label>
+            <input class="input" type="text" name="Imię" placeholder="np. Jan" />
+          </div>
+          <div>
+            <label>E-mail (wymagane)</label>
+            <input class="input" type="email" name="E-mail" required placeholder="np. jan@mail.com" />
+          </div>
+        </div>
 
-  <div class="form-row">
-    <div>
-      <label>Termin</label>
-      <select class="input" name="timing">
-        <option value="pilnie">Pilnie (1–4 tygodnie)</option>
-        <option value="normalnie">Normalnie (1–3 miesiące)</option>
-        <option value="bez-pospiechu">Bez pośpiechu</option>
-      </select>
-    </div>
-    <div>
-      <label>Telefon (opcjonalnie)</label>
-      <input class="input" type="text" name="phone" placeholder="+48 ..." />
-    </div>
-  </div>
+        <div class="form-row">
+          <div>
+            <label>Miasto / województwo</label>
+            <input class="input" type="text" name="Miasto / województwo" placeholder="np. Wrocław / Dolnośląskie" />
+          </div>
+          <div>
+            <label>Metraż (m²)</label>
+            <input class="input" type="number" name="Metraż (m²)" placeholder="np. 52" />
+          </div>
+        </div>
 
-  <label>Opis własnymi słowami</label>
-  <textarea
-    class="input"
-    name="description"
-    placeholder="Np. malowanie, podłogi, łazienka, elektryka…"
-  ></textarea>
+        <div class="form-row">
+          <div>
+            <label>Stan mieszkania</label>
+            <select class="input" name="Stan mieszkania">
+              <option value="Deweloperski">Deweloperski</option>
+              <option value="Rynek wtórny">Rynek wtórny</option>
+            </select>
+          </div>
+          <div>
+            <label>Standard</label>
+            <select class="input" name="Standard">
+              <option value="Basic">Basic</option>
+              <option value="Comfort">Comfort</option>
+              <option value="Premium">Premium</option>
+            </select>
+          </div>
+        </div>
 
-  <!-- FORM SETTINGS -->
-  <input type="hidden" name="_next" value="https://vanyakozar7-spec.github.io/controlremont/thank-you.html" />
-  <input type="hidden" name="_subject" value="Nowe zgłoszenie — Remont Control" />
-  <input type="hidden" name="_template" value="table" />
+        <div class="form-row">
+          <div>
+            <label>Termin</label>
+            <select class="input" name="Termin">
+              <option value="Pilnie (1–4 tygodnie)">Pilnie (1–4 tygodnie)</option>
+              <option value="Normalnie (1–3 miesiące)">Normalnie (1–3 miesiące)</option>
+              <option value="Bez pośpiechu">Bez pośpiechu</option>
+            </select>
+          </div>
+          <div>
+            <label>Telefon (opcjonalnie)</label>
+            <input class="input" type="text" name="Telefon" placeholder="+48 ..." />
+          </div>
+        </div>
 
-  <p style="margin-top:16px;">
-    <button class="btn" type="submit">Wyślij zgłoszenie</button>
-    <a class="btn secondary" href="terms.html" style="margin-left:10px;">Zasady</a>
-  </p>
+        <label>Opis własnymi słowami</label>
+        <textarea
+          class="input"
+          name="Opis"
+          placeholder="Np. malowanie, podłogi, łazienka, elektryka…"
+        ></textarea>
 
-  <p class="small" style="margin-top:10px;">
-    Wysyłając formularz akceptujesz zasady korzystania. Dane używamy wyłącznie do odpowiedzi.
-  </p>
+        <p style="margin-top:16px;">
+          <button class="btn" type="submit">Wyślij zgłoszenie</button>
+          <a class="btn secondary" href="terms.html" style="margin-left:10px;">Zasady</a>
+        </p>
 
-</form>
+        <p class="small" style="margin-top:10px;">
+          Wysyłając formularz akceptujesz zasady korzystania. Dane używamy wyłącznie do odpowiedzi.
+        </p>
+
+      </form>
       <!-- /FORM -->
 
     </div>
@@ -135,5 +134,6 @@
 </footer>
 
 </body>
-
 </html>
+</html>
+

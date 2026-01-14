@@ -56,3 +56,50 @@ textarea{min-height:120px;resize:vertical}
   .h1{font-size:32px}
   .menu{gap:6px}
 }
+/* ===== Pricing ===== */
+
+.price-card {
+  position: relative;
+  text-align: left;
+}
+
+.price-title {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.price {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 6px 0 12px;
+}
+
+.price-card .btn.full {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.price-card.highlight {
+  border: 2px solid #000;
+}
+
+.price-card .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
+}
+

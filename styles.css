@@ -102,4 +102,87 @@ textarea{min-height:120px;resize:vertical}
     grid-template-columns: 1fr;
   }
 }
+/* ===== Check page readability fix ===== */
+
+/* Global background for form sections */
+.section {
+  background: #f6f7f9;
+}
+
+/* Main form card */
+.form,
+.section .card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+}
+
+/* Sub-sections inside form */
+.form h2.h2 {
+  background: #f1f3f6;
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-top: 24px;
+  margin-bottom: 14px;
+}
+
+/* Inner cards (checkbox blocks etc.) */
+.form .card {
+  background: #f8f9fb;
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+}
+
+/* Inputs */
+.input,
+select.input,
+textarea.input {
+  background: #ffffff;
+  border: 1px solid #cfd4dc;
+  border-radius: 8px;
+}
+
+/* Focus state */
+.input:focus,
+select.input:focus,
+textarea.input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+/* Checkboxes & radios */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #000;
+  transform: scale(1.05);
+  margin-right: 6px;
+}
+
+/* Small helper text */
+.small {
+  color: #555;
+}
+
+/* Notice box (selected plan etc.) */
+.notice {
+  background: #eef1f6;
+  border-left: 4px solid #000;
+  padding: 12px 14px;
+  border-radius: 8px;
+}
+
+/* Divider */
+hr {
+  border: none;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+}
+
+/* Mobile spacing */
+@media (max-width: 800px) {
+  .form h2.h2 {
+    font-size: 16px;
+  }
+}
 

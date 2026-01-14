@@ -4,17 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sprawdź swój remont — Remont Control</title>
-  <meta name="description" content="Wypełnij krótki formularz. Uporządkujemy zakres, etapy i przygotujemy plan kontroli jakości." />
+  <meta name="description" content="Wypełnij krótki formularz (3–5 minut). Uporządkujemy zakres, etapy i przygotujemy plan kontroli." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
 <header class="nav">
   <div class="container nav-inner">
-    <a class="brand" href="./">
-      <span class="brand-name">Remont</span>
-      <span class="brand-accent">Control</span>
-    </a>
+    <a class="brand" href="./">Remont Control</a>
     <nav class="menu">
       <a href="about.html">O serwisie</a>
       <a href="terms.html">Zasady</a>
@@ -27,69 +24,36 @@
 
   <section class="hero">
     <div class="card">
-      <h1 class="h1">Sprawdź swój remont</h1>
+      <div class="badge">Bez rejestracji • 3–5 minut • Odpowiedź w 24h robocze</div>
+      <h1 class="h1" style="margin-top:12px;">Sprawdź swój remont</h1>
       <p class="lead">
-        Odpowiedz na kilka pytań (3–6 minut). Przygotujemy uporządkowany zakres, etapy i plan kontroli jakości.
+        Odpowiedz na kilka pytań. Przygotujemy uporządkowany zakres, etapy i plan kontroli — tak, żeby było jasno
+        „co wchodzi”, „co po czym” i gdzie najczęściej pojawiają się dopłaty.
       </p>
       <p class="small">
-        To nie jest „dokładna wycena co do złotówki”. Otrzymasz strukturę + widełki kosztów oraz ryzyka.
+        To nie jest dokładna wycena — pokazujemy widełki i strukturę. Widełki zależą od miasta, metrażu, stanu i standardu.
       </p>
-
-      <div class="notice" id="planBox" style="display:none;margin-top:14px;"></div>
     </div>
   </section>
 
-  <section class="section check-wrap">
+  <section class="section">
     <div class="card">
-      <form id="leadForm"
-            method="POST"
-            action="https://formsubmit.co/remontcontrol.info@gmail.com"
-            class="form check-form">
 
-        <!-- FormSubmit settings -->
+      <!-- FORM (FormSubmit) -->
+      <form method="POST" action="https://formsubmit.co/remontcontrol.info@gmail.com" class="form">
+
+        <!-- SETTINGS (Twoje) -->
         <input type="hidden" name="_subject" value="Nowe zgłoszenie — Remont Control" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://vanyakozar7-spec.github.io/rem.control/thank-you.html" />
 
-        <!-- Redirect after submit (set via JS to include plan) -->
-        <input type="hidden" name="_next" id="_next" value="payment.html" />
-
-        <!-- Selected plan (hidden) -->
-        <input type="hidden" name="Wybrany pakiet" id="planField" value="" />
-
-        <!-- 1) Pakiet -->
-        <h2 class="h2 check-h2">1) Pakiet</h2>
-
-        <div class="grid2">
-          <div class="sub-card">
-            <label class="label-strong">Wybierz pakiet</label>
-            <select class="input" id="planSelect">
-              <option value="BASIC">BASIC — 149 zł</option>
-              <option value="PLUS" selected>PLUS — 299 zł (najczęściej wybierany)</option>
-              <option value="PREMIUM">PREMIUM — 499 zł</option>
-            </select>
-            <p class="small help">Jeśli wybrałeś pakiet na stronie głównej — ustawimy go automatycznie.</p>
-          </div>
-
-          <div class="sub-card">
-            <label class="label-strong">Jak szybko potrzebujesz materiał?</label>
-            <select class="input" name="Priorytet realizacji">
-              <option value="Standard (do 24h)" selected>Standard (do 24h)</option>
-              <option value="Pilnie (do 12h)">Pilnie (do 12h)</option>
-              <option value="Bez pośpiechu (2–3 dni)">Bez pośpiechu (2–3 dni)</option>
-            </select>
-            <p class="small help">Po płatności potwierdzimy termin realizacji.</p>
-          </div>
-        </div>
-
-        <hr class="divider" />
-
-        <!-- 2) Kontakt -->
-        <h2 class="h2 check-h2">2) Dane kontaktowe</h2>
+        <!-- 1) Kontakt -->
+        <h2 class="h2" style="margin-bottom:10px;">1) Kontakt</h2>
 
         <div class="form-row">
           <div>
-            <label>Imię</label>
+            <label>Imię (opcjonalnie)</label>
             <input class="input" type="text" name="Imię" placeholder="np. Jan" />
           </div>
           <div>
@@ -104,29 +68,28 @@
             <input class="input" type="text" name="Telefon" placeholder="+48 ..." />
           </div>
           <div>
-            <label>Miasto / województwo</label>
-            <input class="input" type="text" name="Miasto / województwo" placeholder="np. Wrocław / Dolnośląskie" />
+            <label>Preferowana forma kontaktu</label>
+            <select class="input" name="Kontakt preferowany">
+              <option value="E-mail" selected>E-mail</option>
+              <option value="Telefon">Telefon</option>
+              <option value="WhatsApp">WhatsApp</option>
+            </select>
           </div>
         </div>
 
-        <hr class="divider" />
+        <div style="height:16px;"></div>
 
-        <!-- 3) Mieszkanie -->
-        <h2 class="h2 check-h2">3) Mieszkanie / dom</h2>
+        <!-- 2) Podstawy -->
+        <h2 class="h2" style="margin-bottom:10px;">2) Mieszkanie i etap</h2>
 
         <div class="form-row">
           <div>
-            <label>Metraż (m²)</label>
-            <input class="input" type="number" name="Metraż (m²)" placeholder="np. 52" />
+            <label>Miasto / województwo</label>
+            <input class="input" type="text" name="Miasto / województwo" placeholder="np. Wrocław / Dolnośląskie" />
           </div>
           <div>
-            <label>Liczba pokoi</label>
-            <select class="input" name="Liczba pokoi">
-              <option value="1">1</option>
-              <option value="2" selected>2</option>
-              <option value="3">3</option>
-              <option value="4+">4+</option>
-            </select>
+            <label>Metraż (m²)</label>
+            <input class="input" type="number" name="Metraż (m²)" min="10" max="500" placeholder="np. 52" />
           </div>
         </div>
 
@@ -135,145 +98,134 @@
             <label>Stan mieszkania</label>
             <select class="input" name="Stan mieszkania">
               <option value="Deweloperski">Deweloperski</option>
-              <option value="Rynek wtórny" selected>Rynek wtórny</option>
+              <option value="Rynek wtórny">Rynek wtórny</option>
             </select>
           </div>
           <div>
-            <label>Standard wykończenia</label>
-            <select class="input" name="Standard wykończenia">
+            <label>Etap remontu</label>
+            <select class="input" name="Etap remontu">
+              <option value="Planuję (przed startem)" selected>Planuję (przed startem)</option>
+              <option value="Jest oferta/wykonawca — chcę uporządkować zakres">Jest oferta/wykonawca — chcę uporządkować zakres</option>
+              <option value="W trakcie — pojawiły się dopłaty/problemy">W trakcie — pojawiły się dopłaty/problemy</option>
+              <option value="Po części prac — chcę sprawdzić jakość/zakres">Po części prac — chcę sprawdzić jakość/zakres</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label>Standard</label>
+            <select class="input" name="Standard">
               <option value="Basic">Basic</option>
               <option value="Comfort" selected>Comfort</option>
               <option value="Premium">Premium</option>
             </select>
           </div>
-        </div>
-
-        <hr class="divider" />
-
-        <!-- 4) Zakres -->
-        <h2 class="h2 check-h2">4) Zakres remontu</h2>
-
-        <div class="check-subtitle">Pomieszczenia</div>
-        <div class="grid2">
-          <div class="sub-card">
-            <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Kuchnia"> Kuchnia</label><br/>
-            <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Łazienka / WC"> Łazienka / WC</label><br/>
-            <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Salon"> Salon</label><br/>
-            <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Sypialnia"> Sypialnia</label><br/>
-            <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Przedpokój"> Przedpokój</label><br/>
-            <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Inne"> Inne</label>
-          </div>
-
-          <div class="sub-card">
-            <label class="small"><input type="checkbox" name="Prace[]" value="Malowanie / gładzie"> Malowanie / gładzie</label><br/>
-            <label class="small"><input type="checkbox" name="Prace[]" value="Podłogi (panele/deska/płytki)"> Podłogi (panele/deska/płytki)</label><br/>
-            <label class="small"><input type="checkbox" name="Prace[]" value="Płytki (kuchnia/łazienka)"> Płytki (kuchnia/łazienka)</label><br/>
-            <label class="small"><input type="checkbox" name="Prace[]" value="Drzwi / listwy"> Drzwi / listwy</label><br/>
-            <label class="small"><input type="checkbox" name="Prace[]" value="Zabudowa / meble na wymiar"> Zabudowa / meble na wymiar</label><br/>
-            <label class="small"><input type="checkbox" name="Prace[]" value="Inne"> Inne</label>
-          </div>
-        </div>
-
-        <div class="check-subtitle" style="margin-top:12px;">Instalacje (jeśli dotyczy)</div>
-        <div class="grid2">
-          <div class="sub-card">
-            <label class="small"><input type="checkbox" name="Instalacje[]" value="Elektryka (nowe punkty/rozdzielnia)"> Elektryka (nowe punkty/rozdzielnia)</label><br/>
-            <label class="small"><input type="checkbox" name="Instalacje[]" value="Hydraulika (przeróbki/nowe podejścia)"> Hydraulika (przeróbki/nowe podejścia)</label><br/>
-            <label class="small"><input type="checkbox" name="Instalacje[]" value="Wentylacja"> Wentylacja</label>
-          </div>
-          <div class="sub-card">
-            <label class="small"><input type="checkbox" name="Instalacje[]" value="Oświetlenie (plan/obwody)"> Oświetlenie (plan/obwody)</label><br/>
-            <label class="small"><input type="checkbox" name="Instalacje[]" value="Smart / internet / TV"> Smart / internet / TV</label><br/>
-            <label class="small"><input type="checkbox" name="Instalacje[]" value="Brak zmian"> Brak zmian</label>
-          </div>
-        </div>
-
-        <hr class="divider" />
-
-        <!-- 5) Organizacja -->
-        <h2 class="h2 check-h2">5) Organizacja</h2>
-
-        <div class="form-row">
           <div>
-            <label>Czy masz już ekipę?</label>
-            <select class="input" name="Wykonawca">
-              <option value="Nie, szukam" selected>Nie, szukam</option>
-              <option value="Tak, mam ekipę">Tak, mam ekipę</option>
-              <option value="Mam 1–2 oferty">Mam 1–2 oferty</option>
-            </select>
-          </div>
-          <div>
-            <label>Termin startu</label>
-            <select class="input" name="Termin startu">
-              <option value="W ciągu 1–4 tygodni">W ciągu 1–4 tygodni</option>
-              <option value="1–3 miesiące" selected>1–3 miesiące</option>
+            <label>Termin</label>
+            <select class="input" name="Termin">
+              <option value="Pilnie (1–4 tygodnie)">Pilnie (1–4 tygodnie)</option>
+              <option value="Normalnie (1–3 miesiące)" selected>Normalnie (1–3 miesiące)</option>
               <option value="Bez pośpiechu">Bez pośpiechu</option>
             </select>
           </div>
         </div>
 
-        <div class="form-row">
-          <div>
-            <label>Jak ważna jest kontrola jakości?</label>
-            <select class="input" name="Kontrola jakości">
-              <option value="Bardzo ważna" selected>Bardzo ważna</option>
-              <option value="Średnio ważna">Średnio ważna</option>
-              <option value="Najważniejsze, żeby było szybko">Najważniejsze, żeby było szybko</option>
-            </select>
-          </div>
-          <div>
-            <label>Budżet (opcjonalnie)</label>
-            <select class="input" name="Budżet (opcjonalnie)">
-              <option value="Nie wiem / chcę widełki" selected>Nie wiem / chcę widełki</option>
-              <option value="Mam limit, chcę się zmieścić">Mam limit, chcę się zmieścić</option>
-              <option value="Mam budżet elastyczny">Mam budżet elastyczny</option>
-            </select>
+        <div style="height:16px;"></div>
+
+        <!-- 3) Zakres (szybkie kliknięcia) -->
+        <h2 class="h2" style="margin-bottom:10px;">3) Zakres prac (zaznacz co dotyczy)</h2>
+        <p class="small" style="margin-top:-6px;">
+          To pomaga nam szybciej poukładać zakres i ryzyka. Jeśli nie wiesz — zostaw puste.
+        </p>
+
+        <div class="card" style="padding:14px;">
+          <div class="grid2" style="gap:10px;">
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Demontaż / skuwanie" />
+              Demontaż / skuwanie
+            </label>
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Ściany / gładzie / malowanie" />
+              Ściany / gładzie / malowanie
+            </label>
+
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Podłogi / panele / deska" />
+              Podłogi / panele / deska
+            </label>
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Łazienka (płytki / hydraulika)" />
+              Łazienka (płytki / hydraulika)
+            </label>
+
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Kuchnia (montaż / podłączenia)" />
+              Kuchnia (montaż / podłączenia)
+            </label>
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Elektryka" />
+              Elektryka
+            </label>
+
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Drzwi / listwy / stolarka" />
+              Drzwi / listwy / stolarka
+            </label>
+            <label class="small" style="display:flex;gap:10px;align-items:flex-start;">
+              <input type="checkbox" name="Zakres — prace" value="Inne / nie wiem" />
+              Inne / nie wiem
+            </label>
           </div>
         </div>
 
-        <hr class="divider" />
+        <div style="height:16px;"></div>
 
-        <!-- 6) Materiały -->
-        <h2 class="h2 check-h2">6) Materiały (opcjonalnie)</h2>
-        <p class="small help">
-          Jeśli masz rzut mieszkania / projekt / zdjęcia — wklej link (np. Google Drive, Dropbox).
+        <!-- 4) Opis (minimalny) -->
+        <h2 class="h2" style="margin-bottom:10px;">4) Krótki opis</h2>
+
+        <label>Opis własnymi słowami (opcjonalnie, ale pomaga)</label>
+        <textarea
+          class="input"
+          name="Opis"
+          placeholder="Np. mieszkanie z rynku wtórnego, łazienka i kuchnia do zrobienia, chcę zrozumieć zakres i widełki. Jeśli masz już ofertę — wklej, co jest w cenie."
+          rows="5"
+        ></textarea>
+
+        <label>Masz ofertę od wykonawcy? (opcjonalnie)</label>
+        <select class="input" name="Oferta od wykonawcy">
+          <option value="Nie" selected>Nie</option>
+          <option value="Tak — mam ofertę/kosztorys">Tak — mam ofertę/kosztorys</option>
+          <option value="Tak — mam tylko ustalenia słowne">Tak — mam tylko ustalenia słowne</option>
+        </select>
+
+        <p class="small" style="margin-top:10px;">
+          Zdjęcia/projekt: nie dodajemy plików do formularza (żeby było szybciej).
+          Po wysłaniu zgłoszenia możesz odpisać na e-mail i dołączyć zdjęcia lub PDF projektu — przyspieszy to analizę.
         </p>
 
-        <div class="form-row">
-          <div>
-            <label>Link do materiałów (opcjonalnie)</label>
-            <input class="input" type="url" name="Link do materiałów" placeholder="https://drive.google.com/..." />
-          </div>
-          <div>
-            <label>Co jest dla Ciebie najważniejsze?</label>
-            <select class="input" name="Priorytet klienta">
-              <option value="Cena">Cena</option>
-              <option value="Jakość" selected>Jakość</option>
-              <option value="Czas">Czas</option>
-              <option value="Bez stresu / porządek">Bez stresu / porządek</option>
-            </select>
-          </div>
+        <div style="height:16px;"></div>
+
+        <!-- ZGODA -->
+        <div class="card" style="padding:14px;">
+          <label class="small" style="display:flex; gap:10px; align-items:flex-start;">
+            <input type="checkbox" name="Zgoda" required />
+            Wyrażam zgodę na kontakt w sprawie zgłoszenia i przetwarzanie danych wyłącznie w celu przygotowania odpowiedzi (zgodnie z zasadami serwisu).
+          </label>
         </div>
 
-        <label>Opis remontu (krótko, własnymi słowami)</label>
-        <textarea class="input" name="Opis" placeholder="Np. chcę zrobić łazienkę + elektrykę, obawiam się dopłat, potrzebuję jasnego zakresu…"></textarea>
-
-        <hr class="divider" />
-
-        <label class="small consent">
-          <input type="checkbox" required />
-          Akceptuję <a href="terms.html">zasady</a> i zgadzam się na kontakt e-mail w sprawie zgłoszenia.
-        </label>
-
-        <p class="actions">
-          <button class="btn" type="submit">Przejdź do płatności</button>
-          <a class="btn secondary" href="./">Wróć na stronę główną</a>
+        <p style="margin-top:16px;">
+          <button class="btn" type="submit">Wyślij zgłoszenie</button>
+          <a class="btn secondary" href="terms.html" style="margin-left:10px;">Zasady</a>
         </p>
 
-        <p class="small footnote">
-          Dane używamy wyłącznie do odpowiedzi. Remont Control nie wykonuje remontów i nie sprzedaje ekip.
+        <p class="small" style="margin-top:10px;">
+          Dane wykorzystujemy wyłącznie do odpowiedzi na zgłoszenie. Możesz poprosić o usunięcie danych w dowolnym momencie.
         </p>
+
       </form>
+      <!-- /FORM -->
+
     </div>
   </section>
 </main>
@@ -285,44 +237,6 @@
     </p>
   </div>
 </footer>
-
-<script>
-  (function () {
-    const prices = { BASIC: "149 zł", PLUS: "299 zł", PREMIUM: "499 zł" };
-    const params = new URLSearchParams(window.location.search);
-    const urlPlan = (params.get("plan") || "").toUpperCase();
-
-    const planSelect = document.getElementById("planSelect");
-    const planBox = document.getElementById("planBox");
-    const planField = document.getElementById("planField");
-    const nextField = document.getElementById("_next");
-
-    const validPlans = ["BASIC", "PLUS", "PREMIUM"];
-
-    // apply URL plan if exists
-    if (validPlans.includes(urlPlan)) {
-      planSelect.value = urlPlan;
-    }
-
-    function updatePlan(plan) {
-      const finalPlan = validPlans.includes(plan) ? plan : "PLUS";
-      const price = prices[finalPlan];
-
-      planField.value = `${finalPlan} (${price})`;
-      planBox.style.display = "block";
-      planBox.innerHTML =
-        `Wybrany pakiet: <strong>${finalPlan}</strong> — ${price}. Po wysłaniu formularza przejdziesz do płatności.`;
-
-      nextField.value = `payment.html?plan=${encodeURIComponent(finalPlan)}`;
-    }
-
-    updatePlan(planSelect.value);
-
-    planSelect.addEventListener("change", function () {
-      updatePlan(this.value);
-    });
-  })();
-</script>
 
 </body>
 </html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Płatność — Remont Control</title>
+  <meta name="description" content="Wybierz pakiet i dokonaj płatności." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="./">
+      <span class="brand-name">Remont</span>
+      <span class="brand-accent">Control</span>
+    </a>
+    <nav class="menu">
+      <a href="about.html">O serwisie</a>
+      <a href="terms.html">Zasady</a>
+      <a class="btn" href="check.html">Sprawdź swój remont</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="card">
+      <div class="badge">Krok 2/2</div>
+      <h1 class="h1" style="margin-top:10px;">Płatność</h1>
+      <p class="lead">Potwierdź pakiet i opłać usługę. Po płatności dostaniesz odpowiedź zwykle w 24h.</p>
+
+      <div class="card" style="margin-top:14px;">
+        <h2 class="h2" style="font-size:18px;">Wybrany pakiet</h2>
+        <p class="small" id="chosenPlan" style="margin-top:8px;"></p>
+      </div>
+
+      <div class="grid2" style="margin-top:14px;">
+        <div class="card">
+          <h2 class="h2" style="font-size:18px;">Zapłać online (Stripe)</h2>
+          <p class="small">Najszybciej. Link płatności otworzy bezpieczną stronę Stripe.</p>
+          <a class="btn full" id="stripeBtn" href="#" target="_blank" rel="noopener">Przejdź do płatności</a>
+        </div>
+
+        <div class="card">
+          <h2 class="h2" style="font-size:18px;">Masz pytanie?</h2>
+          <p class="small">Odpowiedz na e-mail potwierdzający zgłoszenie lub napisz do nas bezpośrednio.</p>
+          <a class="btn secondary full" href="mailto:remontcontrol.info@gmail.com">Napisz e-mail</a>
+        </div>
+      </div>
+
+      <p class="notice" style="margin-top:14px;">
+        Po zaksięgowaniu płatności przygotujemy dokumenty zgodnie z wybranym pakietem.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p class="small">
+      Remont Control to serwis informacyjno-kontrolny. Nie jesteśmy stroną umowy i nie gwarantujemy kosztu ani rezultatu prac.
+    </p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    const prices = { BASIC: "149 zł", PLUS: "299 zł", PREMIUM: "499 zł" };
+
+    // TODO: replace these with your real Stripe Payment Links
+    const stripeLinks = {
+      BASIC: "https://buy.stripe.com/REPLACE_BASIC_LINK",
+      PLUS: "https://buy.stripe.com/REPLACE_PLUS_LINK",
+      PREMIUM: "https://buy.stripe.com/REPLACE_PREMIUM_LINK"
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const plan = (params.get("plan") || "PLUS").toUpperCase();
+    const valid = ["BASIC", "PLUS", "PREMIUM"].includes(plan) ? plan : "PLUS";
+
+    document.getElementById("chosenPlan").innerHTML =
+      "<strong>" + valid + "</strong> — " + prices[valid];
+
+    const btn = document.getElementById("stripeBtn");
+    btn.href = stripeLinks[valid];
+  })();
+</script>
+
+</body>
+</html>

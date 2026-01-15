@@ -22,21 +22,27 @@
 
 <main class="container">
 
-  <!-- Light readable section ONLY for this page -->
-  <section class="section light">
+  <section class="hero">
     <div class="card">
-
       <h1 class="h1">Sprawdź swój remont</h1>
-      <p class="small">
-        Wypełnij krótki formularz (2–4 min). Dostaniesz uporządkowany plan + <strong>krótkie uwagi eksperta</strong>.
+      <p class="lead">
+        Wypełnij formularz (2–4 min). Dostaniesz uporządkowany plan + <strong>krótkie uwagi eksperta</strong>.
         Potem przejdziesz do płatności.
       </p>
 
       <div class="notice" id="planNotice" style="margin-top:12px;">
         Wybrany pakiet: <strong id="planLabel">PLUS</strong>
       </div>
+    </div>
+  </section>
 
-      <form id="leadForm" method="POST" action="https://formsubmit.co/remontcontrol.info@gmail.com" class="form" style="margin-top:12px;">
+  <section class="section">
+    <div class="card">
+      <form id="leadForm"
+            method="POST"
+            action="https://formsubmit.co/remontcontrol.info@gmail.com"
+            class="form check-dark"
+            style="margin-top:6px;">
 
         <!-- FormSubmit settings -->
         <input type="hidden" name="_subject" value="Nowe zgłoszenie — Remont Control" />
@@ -49,7 +55,7 @@
         <!-- Selected plan -->
         <input type="hidden" name="Wybrany pakiet" id="planField" value="PLUS" />
 
-        <!-- 1) Pakiet + priorytet -->
+        <!-- 1) Pakiet -->
         <h2 class="h2">1) Pakiet</h2>
 
         <div class="form-row">
@@ -71,7 +77,7 @@
           </div>
         </div>
 
-        <hr />
+        <hr class="divider" />
 
         <!-- 2) Kontakt -->
         <h2 class="h2">2) Kontakt</h2>
@@ -98,7 +104,7 @@
           </div>
         </div>
 
-        <hr />
+        <hr class="divider" />
 
         <!-- 3) Obiekt -->
         <h2 class="h2">3) Mieszkanie / dom</h2>
@@ -136,13 +142,13 @@
           </div>
         </div>
 
-        <hr />
+        <hr class="divider" />
 
-        <!-- 4) Zakres (BASIC-ready) -->
+        <!-- 4) Zakres -->
         <h2 class="h2">4) Zakres remontu</h2>
 
         <label>Co remontujesz? (pomieszczenia)</label>
-        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:6px;">
+        <div class="check-grid">
           <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Kuchnia"> Kuchnia</label>
           <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Łazienka / WC"> Łazienka / WC</label>
           <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Salon"> Salon</label>
@@ -152,7 +158,7 @@
         </div>
 
         <label style="margin-top:12px;">Jakie prace planujesz?</label>
-        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:6px;">
+        <div class="check-grid">
           <label class="small"><input type="checkbox" name="Prace[]" value="Malowanie / gładzie"> Malowanie / gładzie</label>
           <label class="small"><input type="checkbox" name="Prace[]" value="Podłogi"> Podłogi</label>
           <label class="small"><input type="checkbox" name="Prace[]" value="Płytki"> Płytki</label>
@@ -161,15 +167,12 @@
           <label class="small"><input type="checkbox" name="Prace[]" value="Hydraulika"> Hydraulika</label>
         </div>
 
-        <label style="margin-top:12px;">
-  Opisz dokładnie, co ma być wykonane w ramach remontu
-</label>
-
-<textarea
-  class="input"
-  name="Opis zakresu remontu"
-  required
-  placeholder="Opisz możliwie dokładnie, co planujesz zrobić.
+        <label style="margin-top:12px;">Opisz dokładnie, co ma być wykonane w ramach remontu</label>
+        <textarea
+          class="input"
+          name="Opis zakresu remontu"
+          required
+          placeholder="Opisz możliwie dokładnie, co planujesz zrobić.
 Np.:
 – jakie pomieszczenia są remontowane
 – jakie prace w każdym z nich (np. demontaż, instalacje, płytki, malowanie)
@@ -178,15 +181,14 @@ Np.:
 – na jakim etapie jesteś teraz
 
 Im więcej szczegółów podasz, tym dokładniejsze będą moje uwagi i zakres prac."
-></textarea>
+        ></textarea>
+        <p class="small" style="margin-top:8px;">
+          To najważniejsza część formularza. Na podstawie tego opisu przygotowuję zakres prac i wskazuję ryzyka.
+        </p>
 
-<p class="small">
-  To najważniejsza część formularza. Na podstawie tego opisu przygotowuję zakres prac i wskazuję ryzyka.
-</p>
+        <hr class="divider" />
 
-        <hr />
-
-        <!-- 5) Największa obawa (key for BASIC value) -->
+        <!-- 5) Najważniejsze -->
         <h2 class="h2">5) Najważniejsze dla Ciebie</h2>
 
         <div class="form-row">
@@ -221,7 +223,6 @@ Im więcej szczegółów podasz, tym dokładniejsze będą moje uwagi i zakres p
         </p>
 
       </form>
-
     </div>
   </section>
 </main>

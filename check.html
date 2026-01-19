@@ -6,6 +6,47 @@
   <title>Sprawdź swój remont — Remont Control</title>
   <meta name="description" content="Wypełnij formularz. Następnie przejdziesz do płatności online." />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Compact check options (2 columns, segmented) -->
+  <style>
+    .seg { margin-top: 18px; }
+    .subseg { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .subttl { font-size: 13px; opacity: 0.85; margin-bottom: 10px; }
+
+    /* two-column, small "pills" like in your 1st screenshot */
+    .opt-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 12px;
+      margin-top: 8px;
+    }
+    .opt{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+      user-select: none;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+    .opt input{
+      width: 14px;
+      height: 14px;
+      accent-color: #7aa7ff;
+      flex: 0 0 auto;
+    }
+    .opt:hover{
+      border-color: rgba(122,167,255,0.45);
+      background: rgba(122,167,255,0.06);
+    }
+    @media (max-width: 720px){
+      .opt-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -140,65 +181,93 @@
 
         <h2 class="h2">4) Zakres remontu</h2>
 
-        <label>Co remontujesz? (pomieszczenia)</label>
-        <div class="check-grid">
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Kuchnia"> Kuchnia</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Łazienka"> Łazienka</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="WC osobno"> WC osobno</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Salon"> Salon</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Sypialnia"> Sypialnia</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Pokój dziecka"> Pokój dziecka</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Garderoba"> Garderoba</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Przedpokój / korytarz"> Przedpokój / korytarz</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Balkon / taras"> Balkon / taras</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Spiżarnia / schowek"> Spiżarnia / schowek</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Piwnica / komórka"> Piwnica / komórka</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Całe mieszkanie"> Całe mieszkanie</label>
+        <!-- POMIESZCZENIA (compact 2 columns) -->
+        <div class="seg">
+          <label>Co remontujesz? (pomieszczenia)</label>
+          <div class="opt-grid">
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Kuchnia"><span>Kuchnia</span></label>
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Łazienka"><span>Łazienka</span></label>
+
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="WC osobno"><span>WC osobno</span></label>
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Salon"><span>Salon</span></label>
+
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Sypialnia"><span>Sypialnia</span></label>
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Pokój dziecka"><span>Pokój dziecka</span></label>
+
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Garderoba"><span>Garderoba</span></label>
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Przedpokój / korytarz"><span>Przedpokój / korytarz</span></label>
+
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Balkon / taras"><span>Balkon / taras</span></label>
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Spiżarnia / schowek"><span>Spiżarnia / schowek</span></label>
+
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Piwnica / komórka"><span>Piwnica / komórka</span></label>
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Całe mieszkanie"><span>Całe mieszkanie</span></label>
+
+            <label class="opt"><input type="checkbox" name="Pomieszczenia[]" value="Inne"><span>Inne</span></label>
+          </div>
         </div>
 
-        <label style="margin-top:12px;">Jakie prace planujesz? (zaznacz konkret)</label>
-        <div class="check-grid">
-          <!-- Demontaż / przygotowanie -->
-          <label class="small"><input type="checkbox" name="Prace[]" value="Demontaż: stare płytki / podłogi / zabudowy"> Demontaż: stare płytki / podłogi / zabudowy</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Wyniesienie / utylizacja gruzu"> Wyniesienie / utylizacja gruzu</label>
+        <!-- PRACE (segmented) -->
+        <div class="seg">
+          <label style="margin-top:12px;">Jakie prace planujesz? (zaznacz konkret)</label>
 
-          <!-- Ściany i sufity -->
-          <label class="small"><input type="checkbox" name="Prace[]" value="Gładź / szpachlowanie ścian"> Gładź / szpachlowanie ścian</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Malowanie ścian / sufitów"> Malowanie ścian / sufitów</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Tynki / naprawy tynków"> Tynki / naprawy tynków</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Sufit podwieszany (GK)"> Sufit podwieszany (GK)</label>
+          <div class="subseg">
+            <div class="subttl">Demontaż / przygotowanie</div>
+            <div class="opt-grid">
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Demontaż: stare płytki / podłogi / zabudowy"><span>Demontaż</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Wyniesienie / utylizacja gruzu"><span>Gruz / utylizacja</span></label>
+            </div>
+          </div>
 
-          <!-- Elektryka -->
-          <label class="small"><input type="checkbox" name="Prace[]" value="Elektryka: nowe punkty / przeniesienia"> Elektryka: nowe punkty / przeniesienia</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Rozdzielnia / bezpieczniki / pomiary"> Rozdzielnia / bezpieczniki / pomiary</label>
+          <div class="subseg">
+            <div class="subttl">Ściany / sufity</div>
+            <div class="opt-grid">
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Gładź / szpachlowanie ścian"><span>Gładź / szpachla</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Malowanie ścian / sufitów"><span>Malowanie</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Tynki / naprawy tynków"><span>Tynki / naprawy</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Sufit podwieszany (GK)"><span>Sufit GK</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Zabudowa GK: ścianki / wnęki"><span>Zabudowa GK</span></label>
+            </div>
+          </div>
 
-          <!-- Hydraulika -->
-          <label class="small"><input type="checkbox" name="Prace[]" value="Hydraulika: przeniesienia / nowe podejścia"> Hydraulika: przeniesienia / nowe podejścia</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Montaż WC / umywalka / bateria / prysznic"> Montaż WC / umywalka / bateria / prysznic</label>
+          <div class="subseg">
+            <div class="subttl">Elektryka</div>
+            <div class="opt-grid">
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Elektryka: nowe punkty / przeniesienia"><span>Nowe punkty</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Rozdzielnia / bezpieczniki / pomiary"><span>Rozdzielnia / pomiary</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Oświetlenie / montaż lamp"><span>Oświetlenie</span></label>
+            </div>
+          </div>
 
-          <!-- Łazienka / płytki -->
-          <label class="small"><input type="checkbox" name="Prace[]" value="Hydroizolacja (łazienka)"> Hydroizolacja (łazienka)</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Płytki ścienne (łazienka/kuchnia)"> Płytki ścienne (łazienka/kuchnia)</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Płytki podłogowe"> Płytki podłogowe</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Montaż odpływu liniowego / brodzika"> Odpływ liniowy / brodzik</label>
+          <div class="subseg">
+            <div class="subttl">Hydraulika / łazienka</div>
+            <div class="opt-grid">
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Hydraulika: przeniesienia / nowe podejścia"><span>Nowe podejścia</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Montaż WC / umywalka / bateria / prysznic"><span>Biały montaż</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Hydroizolacja (łazienka)"><span>Hydroizolacja</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Montaż odpływu liniowego / brodzika"><span>Odpływ / brodzik</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Płytki ścienne (łazienka/kuchnia)"><span>Płytki ścienne</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Płytki podłogowe"><span>Płytki podłogowe</span></label>
+            </div>
+          </div>
 
-          <!-- Podłogi (konkret) -->
-          <label class="small"><input type="checkbox" name="Prace[]" value="Podłoga: panele (laminat/vinyl)"> Podłoga: panele (laminat/vinyl)</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Podłoga: deska / parkiet"> Podłoga: deska / parkiet</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Podłoga: wylewka / poziomowanie"> Podłoga: wylewka / poziomowanie</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Listwy przypodłogowe"> Listwy przypodłogowe</label>
+          <div class="subseg">
+            <div class="subttl">Podłogi</div>
+            <div class="opt-grid">
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Podłoga: wylewka / poziomowanie"><span>Wylewka</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Podłoga: panele (laminat/vinyl)"><span>Panele / vinyl</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Podłoga: deska / parkiet"><span>Deska / parkiet</span></label>
+            </div>
+          </div>
 
-          <!-- Drzwi -->
-          <label class="small"><input type="checkbox" name="Prace[]" value="Drzwi: standard z ościeżnicą"> Drzwi: standard z ościeżnicą</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Drzwi: ukryta ościeżnica (hidden)"> Drzwi: ukryta ościeżnica (hidden)</label>
-
-          <!-- Zabudowy / meble -->
-          <label class="small"><input type="checkbox" name="Prace[]" value="Zabudowa GK: ścianki / wnęki"> Zabudowa GK: ścianki / wnęki</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Meble na wymiar (kuchnia/szafy)"> Meble na wymiar (kuchnia/szafy)</label>
-
-          <!-- Inne -->
-          <label class="small"><input type="checkbox" name="Prace[]" value="Okna: regulacja / parapety / obróbki"> Okna: regulacja / parapety / obróbki</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Oświetlenie / montaż lamp"> Oświetlenie / montaż lamp</label>
+          <div class="subseg">
+            <div class="subttl">Drzwi / listwy</div>
+            <div class="opt-grid">
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Listwy przypodłogowe"><span>Listwy</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Drzwi: standard z ościeżnicą"><span>Drzwi standard</span></label>
+              <label class="opt"><input type="checkbox" name="Prace[]" value="Drzwi: ukryta ościeżnica (hidden)"><span>Drzwi hidden</span></label>
+            </div>
+          </div>
         </div>
 
         <label style="margin-top:12px;">Opisz dokładnie, co ma być wykonane (najważniejsze)</label>
@@ -385,7 +454,7 @@ Im więcej konkretu, tym dokładniejsze opracowanie."
 </script>
 
 </body>
-</html>
+</html
 
 
 

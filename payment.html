@@ -2,58 +2,130 @@
 <html lang="pl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Płatność — Remont Control</title>
-  <meta name="description" content="Wybierz pakiet i dokonaj płatności." />
+  <meta name="description" content="Płatność online za wybrany pakiet Remont Control." />
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .pay-wrap { max-width: 860px; margin: 0 auto; }
+    .pay-grid { display:grid; grid-template-columns: 1.2fr .8fr; gap: 14px; }
+    @media (max-width: 900px){ .pay-grid{ grid-template-columns: 1fr; } }
+
+    .kv { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08); }
+    .kv:last-child{ border-bottom:none; }
+    .kv .k{ opacity:.85; }
+    .kv .v{ font-weight:600; text-align:right; }
+
+    .muted { opacity:.85; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; }
+    .smallgap { height:10px; }
+  </style>
 </head>
+
 <body>
 
 <header class="nav">
   <div class="container nav-inner">
-    <a class="brand" href="./">
-      <span class="brand-name">Remont</span>
-      <span class="brand-accent">Control</span>
-    </a>
+    <a class="brand" href="./">Remont Control</a>
     <nav class="menu">
       <a href="about.html">O serwisie</a>
       <a href="terms.html">Zasady</a>
-      <a class="btn" href="check.html">Sprawdź swój remont</a>
+      <a class="btn" href="check.html">Wróć do formularza</a>
     </nav>
   </div>
 </header>
 
-<main class="container">
+<main class="container pay-wrap">
+
   <section class="hero">
     <div class="card">
-      <div class="badge">Krok 2/2</div>
-      <h1 class="h1" style="margin-top:10px;">Płatność</h1>
-      <p class="lead">Potwierdź pakiet i opłać usługę. Po płatności dostaniesz odpowiedź zwykle w 24h.</p>
-
-      <div class="card" style="margin-top:14px;">
-        <h2 class="h2" style="font-size:18px;">Wybrany pakiet</h2>
-        <p class="small" id="chosenPlan" style="margin-top:8px;"></p>
-      </div>
-
-      <div class="grid2" style="margin-top:14px;">
-        <div class="card">
-          <h2 class="h2" style="font-size:18px;">Zapłać online (Stripe)</h2>
-          <p class="small">Najszybciej. Link płatności otworzy bezpieczną stronę Stripe.</p>
-          <a class="btn full" id="stripeBtn" href="#" target="_blank" rel="noopener">Przejdź do płatności</a>
-        </div>
-
-        <div class="card">
-          <h2 class="h2" style="font-size:18px;">Masz pytanie?</h2>
-          <p class="small">Odpowiedz na e-mail potwierdzający zgłoszenie lub napisz do nas bezpośrednio.</p>
-          <a class="btn secondary full" href="mailto:remontcontrol.info@gmail.com">Napisz e-mail</a>
-        </div>
-      </div>
-
-      <p class="notice" style="margin-top:14px;">
-        Po zaksięgowaniu płatności przygotujemy dokumenty zgodnie z wybranym pakietem.
+      <h1 class="h1">Płatność online</h1>
+      <p class="lead">
+        Sprawdź podsumowanie. Po opłaceniu zamówienia dostaniesz potwierdzenie i zaczynamy analizę.
+      </p>
+      <p class="notice" style="margin-top:12px;">
+        Jeśli nie widzisz danych — wróć do formularza i wyślij go ponownie.
       </p>
     </div>
   </section>
+
+  <section class="section">
+    <div class="pay-grid">
+
+      <!-- LEFT: SUMMARY -->
+      <div class="card">
+        <h2 class="h2">Podsumowanie</h2>
+
+        <div class="kv">
+          <div class="k">Pakiet</div>
+          <div class="v" id="sumPlan">—</div>
+        </div>
+        <div class="kv">
+          <div class="k">Cena</div>
+          <div class="v" id="sumPrice">—</div>
+        </div>
+        <div class="kv">
+          <div class="k">E-mail</div>
+          <div class="v" id="sumEmail">—</div>
+        </div>
+        <div class="kv">
+          <div class="k">Miasto</div>
+          <div class="v" id="sumCity">—</div>
+        </div>
+        <div class="kv">
+          <div class="k">Metraż</div>
+          <div class="v" id="sumArea">—</div>
+        </div>
+
+        <div class="smallgap"></div>
+
+        <p class="small muted">
+          Po płatności otrzymasz e-mail z potwierdzeniem oraz dalszymi instrukcjami.
+        </p>
+        <p class="small muted">
+          Uwaga: Remont Control nie wykonuje remontów i nie odpowiada za pracę wykonawcy.
+        </p>
+      </div>
+
+      <!-- RIGHT: PAY -->
+      <div class="card">
+        <h2 class="h2">Opłać zamówienie</h2>
+
+        <p class="small muted">
+          Tryb MVP (bez serwera): płatność realizujesz przez link płatności / checkout, a po sukcesie wracasz na stronę.
+        </p>
+
+        <!-- 1) Put your payment links here (optional) -->
+        <div class="notice" style="margin-top:12px;">
+          <strong>Do podłączenia:</strong> wklej swój link płatności dla każdego pakietu w kodzie (sekcja <span class="mono">PAYMENT_LINKS</span>).
+        </div>
+
+        <div style="margin-top:16px;">
+          <button class="btn" id="payBtn" type="button">Opłać teraz</button>
+          <a class="btn secondary" href="check.html" style="margin-left:10px;">Wróć</a>
+        </div>
+
+        <p class="small muted" style="margin-top:10px;">
+          Klikając „Opłać teraz” akceptujesz <a href="terms.html">zasady</a>.
+        </p>
+
+        <hr class="divider" />
+
+        <!-- 2) DEMO / TEST (optional) -->
+        <p class="small muted">
+          Test: jeśli jeszcze nie masz płatności, możesz użyć przycisku poniżej do sprawdzenia wysyłki leadów.
+        </p>
+        <button class="btn secondary" id="testSendBtn" type="button">Test: wyślij zgłoszenie bez płatności</button>
+
+        <p class="small muted" style="margin-top:10px;">
+          Ten przycisk jest tylko do testów — usuń go przed reklamą.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
 </main>
 
 <footer class="footer">
@@ -65,26 +137,137 @@
 </footer>
 
 <script>
-  (function () {
-    const prices = { BASIC: "149 zł", PLUS: "299 zł", PREMIUM: "499 zł" };
+(function () {
+  // --- CONFIG ---
+  const PRICES = { BASIC: "149 zł", PLUS: "299 zł", PREMIUM: "499 zł" };
 
-    // TODO: replace these with your real Stripe Payment Links
-    const stripeLinks = {
-      BASIC: "https://buy.stripe.com/REPLACE_BASIC_LINK",
-      PLUS: "https://buy.stripe.com/REPLACE_PLUS_LINK",
-      PREMIUM: "https://buy.stripe.com/REPLACE_PREMIUM_LINK"
+  // PAYMENT_LINKS:
+  // Вставиш сюди реальні лінки оплати, коли будуть (PayU/Przelewy24/Stripe Payment Link тощо)
+  // Можна залишити порожнім і користуватись Test mode.
+  const PAYMENT_LINKS = {
+    BASIC: "",   // e.g. "https://buy.stripe.com/...."
+    PLUS: "",
+    PREMIUM: ""
+  };
+
+  // FormSubmit endpoint (email receiver)
+  const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/vanyakozar7@gmail.com";
+
+  // Where to go after "success" (we will send lead then redirect)
+  const THANKS_URL = "thanks.html";
+
+  // localStorage key
+  const STORAGE_KEY = "remontcontrol_lead";
+
+  // --- HELPERS ---
+  function safeText(v){ return (v === undefined || v === null || v === "") ? "—" : String(v); }
+
+  function getLead(){
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch(e){
+      return null;
+    }
+  }
+
+  function normalizePlan(lead){
+    const p = (lead && (lead["Wybrany pakiet"] || lead["Pakiet (wybór)"])) ? String(lead["Wybrany pakiet"] || lead["Pakiet (wybór)"]).toUpperCase() : "PLUS";
+    return (p === "BASIC" || p === "PLUS" || p === "PREMIUM") ? p : "PLUS";
+  }
+
+  function fillSummary(lead){
+    const plan = normalizePlan(lead);
+    document.getElementById("sumPlan").textContent  = plan;
+    document.getElementById("sumPrice").textContent = PRICES[plan] || "—";
+    document.getElementById("sumEmail").textContent = safeText(lead && (lead["E-mail"] || lead["Email"]));
+    document.getElementById("sumCity").textContent  = safeText(lead && (lead["Miasto / województwo"] || lead["Miasto"]));
+    document.getElementById("sumArea").textContent  = safeText(lead && (lead["Metraż (m²)"] || lead["Metraż (m²) "])) ;
+  }
+
+  async function sendLeadToEmail(lead){
+    if (!lead) throw new Error("No lead data");
+
+    // IMPORTANT: FormSubmit accepts normal form fields.
+    // We'll send as JSON (AJAX endpoint).
+    const payload = {
+      _subject: "Nowe zgłoszenie — Remont Control",
+      _template: "table",
+      _captcha: "false",
+      ...lead
     };
 
-    const params = new URLSearchParams(window.location.search);
-    const plan = (params.get("plan") || "PLUS").toUpperCase();
-    const valid = ["BASIC", "PLUS", "PREMIUM"].includes(plan) ? plan : "PLUS";
+    const res = await fetch(FORMSUBMIT_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type":"application/json", "Accept":"application/json" },
+      body: JSON.stringify(payload)
+    });
 
-    document.getElementById("chosenPlan").innerHTML =
-      "<strong>" + valid + "</strong> — " + prices[valid];
+    if (!res.ok) {
+      const txt = await res.text().catch(()=> "");
+      throw new Error("Send failed: " + res.status + " " + txt);
+    }
+    return true;
+  }
 
-    const btn = document.getElementById("stripeBtn");
-    btn.href = stripeLinks[valid];
-  })();
+  function goThanks(){
+    window.location.href = THANKS_URL;
+  }
+
+  // --- INIT ---
+  const lead = getLead();
+  fillSummary(lead);
+
+  const plan = normalizePlan(lead);
+
+  // --- BUTTONS ---
+  const payBtn = document.getElementById("payBtn");
+  const testSendBtn = document.getElementById("testSendBtn");
+
+  // MVP flow:
+  // 1) If you have PAYMENT_LINK for selected plan -> go there.
+  // 2) If no link -> fallback: send lead and go to thanks (for now)
+  payBtn.addEventListener("click", async function(){
+    const link = (PAYMENT_LINKS[plan] || "").trim();
+
+    if (link) {
+      // Redirect to real payment link.
+      // After payment you should configure provider to redirect back to: /payment_success.html (optional)
+      window.location.href = link;
+      return;
+    }
+
+    // Fallback (no payment link yet): send now, then thanks
+    payBtn.disabled = true;
+    payBtn.textContent = "Wysyłam…";
+
+    try {
+      await sendLeadToEmail(lead);
+      goThanks();
+    } catch(e){
+      alert("Nie udało się wysłać zgłoszenia. Wróć do formularza i spróbuj ponownie.\n\n" + e.message);
+      payBtn.disabled = false;
+      payBtn.textContent = "Opłać teraz";
+    }
+  });
+
+  // Test mode: always send + thanks
+  testSendBtn.addEventListener("click", async function(){
+    testSendBtn.disabled = true;
+    testSendBtn.textContent = "Wysyłam…";
+
+    try {
+      await sendLeadToEmail(lead);
+      goThanks();
+    } catch(e){
+      alert("Błąd wysyłki: " + e.message);
+      testSendBtn.disabled = false;
+      testSendBtn.textContent = "Test: wyślij zgłoszenie bez płatności";
+    }
+  });
+
+})();
 </script>
 
 </body>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Płatność zakończona — Remont Control</title>
+  <meta name="description" content="Potwierdzenie płatności i wysyłka zgłoszenia." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="./">Remont Control</a>
+    <nav class="menu">
+      <a href="about.html">O serwisie</a>
+      <a href="terms.html">Zasady</a>
+      <a class="btn" href="./">Strona główna</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="card">
+      <h1 class="h1">Dziękujemy! Potwierdzamy płatność…</h1>
+      <p class="lead">Finalizujemy Twoje zgłoszenie i wysyłamy je do analizy.</p>
+      <p class="small" id="statusLine" style="margin-top:10px;opacity:.9;">
+        Proszę nie zamykać tej strony (trwa wysyłka).
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p class="small">
+      Remont Control to serwis informacyjno-kontrolny. Nie jesteśmy stroną umowy i nie gwarantujemy kosztu ani rezultatu prac.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const STORAGE_KEY = "remontcontrol_lead";
+  const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/vanyakozar7@gmail.com";
+  const THANKS_URL = "thanks.html";
+
+  const statusLine = document.getElementById("statusLine");
+
+  function getLead(){
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch(e){
+      return null;
+    }
+  }
+
+  function setPaidMeta(lead){
+    const params = new URLSearchParams(window.location.search);
+    const plan = (params.get("plan") || "").toUpperCase();
+
+    // не довіряємо повністю URL, але використовуємо як підказку
+    if (lead) {
+      lead["Status płatności"] = "OPŁACONO";
+      if (plan) lead["Pakiet (po płatności)"] = plan;
+      lead["Płatność: data (auto)"] = new Date().toISOString();
+    }
+    return lead;
+  }
+
+  async function sendLead(lead){
+    const payload = {
+      _subject: "OPŁACONE zgłoszenie — Remont Control",
+      _template: "table",
+      _captcha: "false",
+      ...lead
+    };
+
+    const res = await fetch(FORMSUBMIT_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type":"application/json", "Accept":"application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      const t = await res.text().catch(()=> "");
+      throw new Error("Send failed: " + res.status + " " + t);
+    }
+    return true;
+  }
+
+  function goThanks(){
+    window.location.href = THANKS_URL;
+  }
+
+  async function run(){
+    const lead = getLead();
+
+    if (!lead) {
+      statusLine.textContent = "Nie znaleziono danych zgłoszenia. Wróć do formularza i wyślij ponownie.";
+      // даємо людині кнопку повернення — без паніки
+      setTimeout(()=>{ window.location.href = "check.html"; }, 2000);
+      return;
+    }
+
+    const finalLead = setPaidMeta(lead);
+
+    try {
+      statusLine.textContent = "Wysyłamy zgłoszenie…";
+      await sendLead(finalLead);
+
+      // щоб не дублювати відправку при оновленні сторінки
+      localStorage.removeItem(STORAGE_KEY);
+
+      statusLine.textContent = "Gotowe. Przekierowanie…";
+      setTimeout(goThanks, 600);
+    } catch(e){
+      statusLine.textContent =
+        "Błąd wysyłki. Skopiuj e-mail i skontaktuj się z nami lub wróć do formularza.\n" +
+        e.message;
+    }
+  }
+
+  run();
+})();
+</script>
+
+</body>
+</html>

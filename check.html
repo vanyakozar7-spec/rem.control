@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sprawdź swój remont — Remont Control</title>
-  <meta name="description" content="Krótki formularz (2–4 min). Otrzymasz plan i szybkie uwagi eksperta. Następnie płatność online." />
+  <meta name="description" content="Wypełnij formularz. Następnie przejdziesz do płatności online." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -26,47 +26,45 @@
     <div class="card">
       <h1 class="h1">Sprawdź swój remont</h1>
       <p class="lead">
-        Wypełnij formularz (2–4 min). Dostaniesz uporządkowany plan + <strong>krótkie uwagi eksperta</strong>.
+        Wypełnij formularz (2–4 min). Dostaniesz uporządkowany plan i konkretne uwagi.
         Potem przejdziesz do płatności.
       </p>
 
-      <div class="notice" id="planNotice" style="margin-top:12px;">
-        Wybrany pakiet: <strong id="planLabel">PLUS</strong>
+      <div class="notice" style="margin-top:12px;">
+        Wybrany pakiet: <strong id="planLabel">PLUS — 299 zł</strong>
       </div>
+
+      <p class="small" style="margin-top:10px;">
+        Remont Control nie wykonuje remontów i nie poleca ekip. Pomagamy uporządkować zakres, koszty (widełki) i kontrolę jakości.
+      </p>
     </div>
   </section>
 
   <section class="section">
     <div class="card">
-      <form id="leadForm"
-            method="POST"
-            action="https://formsubmit.co/remontcontrol.info@gmail.com"
-            class="form check-dark"
-            style="margin-top:6px;">
 
-        <!-- FormSubmit settings -->
-        <input type="hidden" name="_subject" value="Nowe zgłoszenie — Remont Control" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
+      <form id="leadForm" class="form check-dark">
 
-        <!-- Redirect after submit (set via JS with plan) -->
-        <input type="hidden" name="_next" id="_next" value="payment.html" />
-
-        <!-- Selected plan -->
+        <!-- Hidden fields -->
         <input type="hidden" name="Wybrany pakiet" id="planField" value="PLUS" />
+        <input type="hidden" name="Data (auto)" id="localDate" value="" />
+        <input type="hidden" name="Źródło" value="remontcontrol.pl" />
 
-        <!-- 1) Pakiet -->
         <h2 class="h2">1) Pakiet</h2>
 
         <div class="form-row">
           <div>
             <label>Wybierz pakiet</label>
-            <select class="input" id="planSelect">
-              <option value="BASIC">BASIC — 149 zł (plan + szybkie uwagi)</option>
-              <option value="PLUS" selected>PLUS — 299 zł (kontrola + korekta)</option>
-              <option value="PREMIUM">PREMIUM — 499 zł (najwięcej wsparcia)</option>
+            <select class="input" id="planSelect" name="Pakiet (wybór)">
+              <option value="BASIC">BASIC — 149 zł</option>
+              <option value="PLUS" selected>PLUS — 299 zł</option>
+              <option value="PREMIUM">PREMIUM — 499 zł</option>
             </select>
+            <p class="small" style="margin-top:8px;">
+              Konsultacje online dostępne są tylko w pakiecie <strong>PREMIUM</strong>.
+            </p>
           </div>
+
           <div>
             <label>Kiedy startujesz?</label>
             <select class="input" name="Termin startu">
@@ -79,9 +77,7 @@
 
         <hr class="divider" />
 
-        <!-- 2) Kontakt -->
         <h2 class="h2">2) Kontakt</h2>
-
         <div class="form-row">
           <div>
             <label>Imię</label>
@@ -106,13 +102,11 @@
 
         <hr class="divider" />
 
-        <!-- 3) Obiekt -->
         <h2 class="h2">3) Mieszkanie / dom</h2>
-
         <div class="form-row">
           <div>
             <label>Stan</label>
-            <select class="input" name="Stan mieszkania">
+            <select class="input" name="Stan">
               <option value="Deweloperski">Deweloperski</option>
               <option value="Rynek wtórny" selected>Rynek wtórny</option>
             </select>
@@ -134,7 +128,7 @@
           </div>
           <div>
             <label>Czy masz już ekipę?</label>
-            <select class="input" name="Czy masz ekipę">
+            <select class="input" name="Ekipa">
               <option value="Nie, szukam" selected>Nie, szukam</option>
               <option value="Tak, mam ekipę">Tak, mam ekipę</option>
               <option value="Mam 1–2 oferty">Mam 1–2 oferty</option>
@@ -144,56 +138,134 @@
 
         <hr class="divider" />
 
-        <!-- 4) Zakres -->
         <h2 class="h2">4) Zakres remontu</h2>
 
         <label>Co remontujesz? (pomieszczenia)</label>
         <div class="check-grid">
           <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Kuchnia"> Kuchnia</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Łazienka / WC"> Łazienka / WC</label>
+          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Łazienka"> Łazienka</label>
+          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="WC osobno"> WC osobno</label>
           <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Salon"> Salon</label>
           <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Sypialnia"> Sypialnia</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Przedpokój"> Przedpokój</label>
-          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Inne"> Inne</label>
+          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Pokój dziecka"> Pokój dziecka</label>
+          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Garderoba"> Garderoba</label>
+          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Przedpokój / korytarz"> Przedpokój / korytarz</label>
+          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Balkon / taras"> Balkon / taras</label>
+          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Spiżarnia / schowek"> Spiżarnia / schowek</label>
+          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Piwnica / komórka"> Piwnica / komórka</label>
+          <label class="small"><input type="checkbox" name="Pomieszczenia[]" value="Całe mieszkanie"> Całe mieszkanie</label>
         </div>
 
-        <label style="margin-top:12px;">Jakie prace planujesz?</label>
+        <label style="margin-top:12px;">Jakie prace planujesz? (zaznacz konkret)</label>
         <div class="check-grid">
-          <label class="small"><input type="checkbox" name="Prace[]" value="Malowanie / gładzie"> Malowanie / gładzie</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Podłogi"> Podłogi</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Płytki"> Płytki</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Drzwi / listwy"> Drzwi / listwy</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Elektryka"> Elektryka</label>
-          <label class="small"><input type="checkbox" name="Prace[]" value="Hydraulika"> Hydraulika</label>
+          <!-- Demontaż / przygotowanie -->
+          <label class="small"><input type="checkbox" name="Prace[]" value="Demontaż: stare płytki / podłogi / zabudowy"> Demontaż: stare płytki / podłogi / zabudowy</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Wyniesienie / utylizacja gruzu"> Wyniesienie / utylizacja gruzu</label>
+
+          <!-- Ściany i sufity -->
+          <label class="small"><input type="checkbox" name="Prace[]" value="Gładź / szpachlowanie ścian"> Gładź / szpachlowanie ścian</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Malowanie ścian / sufitów"> Malowanie ścian / sufitów</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Tynki / naprawy tynków"> Tynki / naprawy tynków</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Sufit podwieszany (GK)"> Sufit podwieszany (GK)</label>
+
+          <!-- Elektryka -->
+          <label class="small"><input type="checkbox" name="Prace[]" value="Elektryka: nowe punkty / przeniesienia"> Elektryka: nowe punkty / przeniesienia</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Rozdzielnia / bezpieczniki / pomiary"> Rozdzielnia / bezpieczniki / pomiary</label>
+
+          <!-- Hydraulika -->
+          <label class="small"><input type="checkbox" name="Prace[]" value="Hydraulika: przeniesienia / nowe podejścia"> Hydraulika: przeniesienia / nowe podejścia</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Montaż WC / umywalka / bateria / prysznic"> Montaż WC / umywalka / bateria / prysznic</label>
+
+          <!-- Łazienka / płytki -->
+          <label class="small"><input type="checkbox" name="Prace[]" value="Hydroizolacja (łazienka)"> Hydroizolacja (łazienka)</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Płytki ścienne (łazienka/kuchnia)"> Płytki ścienne (łazienka/kuchnia)</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Płytki podłogowe"> Płytki podłogowe</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Montaż odpływu liniowego / brodzika"> Odpływ liniowy / brodzik</label>
+
+          <!-- Podłogi (konkret) -->
+          <label class="small"><input type="checkbox" name="Prace[]" value="Podłoga: panele (laminat/vinyl)"> Podłoga: panele (laminat/vinyl)</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Podłoga: deska / parkiet"> Podłoga: deska / parkiet</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Podłoga: wylewka / poziomowanie"> Podłoga: wylewka / poziomowanie</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Listwy przypodłogowe"> Listwy przypodłogowe</label>
+
+          <!-- Drzwi -->
+          <label class="small"><input type="checkbox" name="Prace[]" value="Drzwi: standard z ościeżnicą"> Drzwi: standard z ościeżnicą</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Drzwi: ukryta ościeżnica (hidden)"> Drzwi: ukryta ościeżnica (hidden)</label>
+
+          <!-- Zabudowy / meble -->
+          <label class="small"><input type="checkbox" name="Prace[]" value="Zabudowa GK: ścianki / wnęki"> Zabudowa GK: ścianki / wnęki</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Meble na wymiar (kuchnia/szafy)"> Meble na wymiar (kuchnia/szafy)</label>
+
+          <!-- Inne -->
+          <label class="small"><input type="checkbox" name="Prace[]" value="Okna: regulacja / parapety / obróbki"> Okna: regulacja / parapety / obróbki</label>
+          <label class="small"><input type="checkbox" name="Prace[]" value="Oświetlenie / montaż lamp"> Oświetlenie / montaż lamp</label>
         </div>
 
-        <label style="margin-top:12px;">Opisz dokładnie, co ma być wykonane w ramach remontu</label>
+        <label style="margin-top:12px;">Opisz dokładnie, co ma być wykonane (najważniejsze)</label>
         <textarea
           class="input"
           name="Opis zakresu remontu"
           required
-          placeholder="Opisz możliwie dokładnie, co planujesz zrobić.
-Np.:
-– jakie pomieszczenia są remontowane
-– jakie prace w każdym z nich (np. demontaż, instalacje, płytki, malowanie)
-– czy planujesz zmiany układu, nowe instalacje, przenoszenie punktów
-– co już jest ustalone, a co jest niejasne
-– na jakim etapie jesteś teraz
+          placeholder="Napisz konkretnie:
+– co robimy w każdym pomieszczeniu
+– co demontujemy
+– elektryka/hydraulika: czy przenosisz punkty, ile i gdzie
+– podłogi: jakie dokładnie (panele/parkiet/płytki), czy wylewka/poziomowanie
+– drzwi: standard czy hidden, ile sztuk
+– co jest już ustalone, a co jest niejasne
+– czego się obawiasz (dopłaty/jakość/termny)
 
-Im więcej szczegółów podasz, tym dokładniejsze będą moje uwagi i zakres prac."
+Im więcej konkretu, tym dokładniejsze opracowanie."
         ></textarea>
+
+        <label style="margin-top:12px;">Załączniki (PDF / projekt / zdjęcia) — najlepiej jako link</label>
+        <input
+          class="input"
+          type="url"
+          name="Załączniki (link)"
+          placeholder="Wklej link do Google Drive / Dropbox (ustaw dostęp: 'Każdy z linkiem')"
+        />
         <p class="small" style="margin-top:8px;">
-          To najważniejsza część formularza. Na podstawie tego opisu przygotowuję zakres prac i wskazuję ryzyka.
+          Uwaga: w obecnej wersji strony (bez serwera) nie da się bezpiecznie przesłać pliku jako załącznik przez formularz i płatność.
+          Najlepsza opcja to link do folderu/pliku (PDF, zdjęcia).
         </p>
 
         <hr class="divider" />
 
-        <!-- 5) Najważniejsze -->
-        <h2 class="h2">5) Najważniejsze dla Ciebie</h2>
+        <!-- PREMIUM ONLY -->
+        <div id="premiumOnly" style="display:none;">
+          <h2 class="h2">5) Konsultacje online (tylko PREMIUM)</h2>
 
+          <div class="form-row">
+            <div>
+              <label>Preferowany kontakt</label>
+              <select class="input" name="Konsultacje: kontakt" id="consultContact">
+                <option value="">— wybierz —</option>
+                <option value="Telefon">Telefon</option>
+                <option value="Google Meet">Google Meet</option>
+                <option value="WhatsApp">WhatsApp</option>
+              </select>
+            </div>
+            <div>
+              <label>Preferowany termin</label>
+              <input class="input" type="text" name="Konsultacje: termin" id="consultTime"
+                     placeholder="np. pon/śr po 18:00, weekend rano" />
+            </div>
+          </div>
+
+          <label style="margin-top:12px;">Najważniejsze 3 pytania na konsultację</label>
+          <textarea class="input" name="Konsultacje: 3 pytania" id="consultQuestions"
+                    placeholder="1) ...
+2) ...
+3) ..."></textarea>
+
+          <hr class="divider" />
+        </div>
+
+        <h2 class="h2">6) Priorytety</h2>
         <div class="form-row">
           <div>
-            <label>Największa obawa (wybierz jedną)</label>
+            <label>Największa obawa</label>
             <select class="input" name="Największa obawa">
               <option value="Dopłaty w trakcie" selected>Dopłaty w trakcie</option>
               <option value="Niejasny zakres i konflikty">Niejasny zakres i konflikty</option>
@@ -203,8 +275,13 @@ Im więcej szczegółów podasz, tym dokładniejsze będą moje uwagi i zakres p
             </select>
           </div>
           <div>
-            <label>Link do materiałów (opcjonalnie)</label>
-            <input class="input" type="url" name="Link do materiałów" placeholder="Google Drive / Dropbox / zdjęcia" />
+            <label>Budżet (opcjonalnie)</label>
+            <select class="input" name="Budżet (opcjonalnie)">
+              <option value="">— nie wiem / nie podaję —</option>
+              <option value="Niski (szukam oszczędności)">Niski (szukam oszczędności)</option>
+              <option value="Średni (rozsądnie, bez luksusu)">Średni (rozsądnie, bez luksusu)</option>
+              <option value="Wyższy (komfort / premium rozwiązania)">Wyższy (komfort / premium rozwiązania)</option>
+            </select>
           </div>
         </div>
 
@@ -219,12 +296,14 @@ Im więcej szczegółów podasz, tym dokładniejsze będą moje uwagi i zakres p
         </p>
 
         <p class="small" style="margin-top:10px;">
-          Remont Control nie wykonuje remontów. Dostajesz strukturę i kontrolę procesu.
+          Następny krok: płatność online. Po opłacie otrzymasz potwierdzenie i dalsze instrukcje.
         </p>
 
       </form>
+
     </div>
   </section>
+
 </main>
 
 <footer class="footer">
@@ -236,32 +315,73 @@ Im więcej szczegółów podasz, tym dokładniejsze będą moje uwagi i zakres p
 </footer>
 
 <script>
-  (function () {
-    const prices = { BASIC: "149 zł", PLUS: "299 zł", PREMIUM: "499 zł" };
-    const valid = ["BASIC","PLUS","PREMIUM"];
+(function () {
+  const prices = { BASIC: "149 zł", PLUS: "299 zł", PREMIUM: "499 zł" };
+  const valid = ["BASIC", "PLUS", "PREMIUM"];
 
-    const params = new URLSearchParams(window.location.search);
-    const urlPlan = (params.get("plan") || "").toUpperCase();
+  const params = new URLSearchParams(window.location.search);
+  const urlPlan = (params.get("plan") || "").toUpperCase();
 
-    const planSelect = document.getElementById("planSelect");
-    const planField  = document.getElementById("planField");
-    const planLabel  = document.getElementById("planLabel");
-    const nextField  = document.getElementById("_next");
+  const planSelect = document.getElementById("planSelect");
+  const planField  = document.getElementById("planField");
+  const planLabel  = document.getElementById("planLabel");
+  const localDate  = document.getElementById("localDate");
 
-    function setPlan(plan){
-      const p = valid.includes(plan) ? plan : "PLUS";
-      planSelect.value = p;
-      planField.value = `${p} (${prices[p]})`;
-      planLabel.textContent = `${p} — ${prices[p]}`;
-      nextField.value = `payment.html?plan=${encodeURIComponent(p)}`;
+  const premiumOnly = document.getElementById("premiumOnly");
+  const consultContact = document.getElementById("consultContact");
+  const consultTime = document.getElementById("consultTime");
+  const consultQuestions = document.getElementById("consultQuestions");
+
+  function setPlan(plan){
+    const p = valid.includes(plan) ? plan : "PLUS";
+    planSelect.value = p;
+    planField.value = p;
+    planLabel.textContent = `${p} — ${prices[p]}`;
+
+    const isPremium = (p === "PREMIUM");
+    premiumOnly.style.display = isPremium ? "block" : "none";
+
+    if (!isPremium) {
+      if (consultContact) consultContact.value = "";
+      if (consultTime) consultTime.value = "";
+      if (consultQuestions) consultQuestions.value = "";
+    }
+  }
+
+  try { localDate.value = new Date().toISOString(); } catch(e) {}
+
+  if (valid.includes(urlPlan)) setPlan(urlPlan);
+  else setPlan(planSelect.value);
+
+  planSelect.addEventListener("change", function(){
+    setPlan(this.value);
+  });
+
+  document.getElementById("leadForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const fd = new FormData(this);
+    const obj = {};
+
+    for (const [k,v] of fd.entries()) {
+      if (k.endsWith("[]")) {
+        if (!obj[k]) obj[k] = [];
+        obj[k].push(v);
+      } else {
+        if (obj[k] !== undefined) obj[k] = Array.isArray(obj[k]) ? obj[k].concat(v) : [obj[k], v];
+        else obj[k] = v;
+      }
     }
 
-    setPlan(valid.includes(urlPlan) ? urlPlan : planSelect.value);
+    if (obj["Pomieszczenia[]"]) obj["Pomieszczenia"] = obj["Pomieszczenia[]"].join(", ");
+    if (obj["Prace[]"]) obj["Prace"] = obj["Prace[]"].join(", ");
+    delete obj["Pomieszczenia[]"];
+    delete obj["Prace[]"];
 
-    planSelect.addEventListener("change", function(){
-      setPlan(this.value);
-    });
-  })();
+    localStorage.setItem("remontcontrol_lead", JSON.stringify(obj));
+    window.location.href = "payment.html";
+  });
+})();
 </script>
 
 </body>

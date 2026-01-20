@@ -488,3 +488,58 @@ select.input option{
 }
 
 .spacer-12{ height:12px; }
+/* ========================================================= */
+/* ===================== LOGO (VARIANT A) ================== */
+/* ========================================================= */
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:800;
+  letter-spacing:-0.3px;
+  white-space:nowrap;
+}
+
+/* Remont */
+.logo-remont{
+  font-size:22px;
+  color:#ffffff;
+}
+
+/* Control (gradient like in your logo) */
+.logo-control{
+  font-size:22px;
+  background:linear-gradient(180deg,#3fa9ff,#1e6fff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+/* Checkmark */
+.logo-check{
+  font-size:22px;
+  color:#27d3a2;
+  margin-left:4px;
+}
+
+/* Hover – subtle, premium */
+.brand:hover .logo-remont{ color:#f0f4ff; }
+.brand:hover .logo-check{ filter:brightness(1.1); }
+
+/* ===================== MOBILE ===================== */
+@media (max-width:900px){
+  .logo-remont,
+  .logo-control,
+  .logo-check{
+    font-size:20px;
+  }
+}
+
+@media (max-width:520px){
+  .logo-remont,
+  .logo-control,
+  .logo-check{
+    font-size:18px;
+  }
+}

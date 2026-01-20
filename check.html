@@ -6,47 +6,6 @@
   <title>Sprawdź swój remont — Remont Control</title>
   <meta name="description" content="Wypełnij formularz. Następnie przejdziesz do płatności online." />
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- Compact check options (2 columns, segmented) -->
-  <style>
-    .seg { margin-top: 18px; }
-    .subseg { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); }
-    .subttl { font-size: 13px; opacity: 0.85; margin-bottom: 10px; }
-
-    /* two-column, small "pills" like in your 1st screenshot */
-    .opt-grid{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px 12px;
-      margin-top: 8px;
-    }
-    .opt{
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.03);
-      cursor: pointer;
-      user-select: none;
-      font-size: 14px;
-      line-height: 1.2;
-    }
-    .opt input{
-      width: 14px;
-      height: 14px;
-      accent-color: #7aa7ff;
-      flex: 0 0 auto;
-    }
-    .opt:hover{
-      border-color: rgba(122,167,255,0.45);
-      background: rgba(122,167,255,0.06);
-    }
-    @media (max-width: 720px){
-      .opt-grid{ grid-template-columns: 1fr; }
-    }
-  </style>
 </head>
 <body>
 
@@ -187,7 +146,7 @@
 
         <h2 class="h2">4) Zakres remontu</h2>
 
-        <!-- POMIESZCZENIA (compact 2 columns) -->
+        <!-- POMIESZCZENIA -->
         <div class="seg">
           <label>Co remontujesz? (pomieszczenia)</label>
           <div class="opt-grid">
@@ -213,7 +172,7 @@
           </div>
         </div>
 
-        <!-- PRACE (segmented) -->
+        <!-- PRACE -->
         <div class="seg">
           <label style="margin-top:12px;">Jakie prace planujesz? (zaznacz konkret)</label>
 
@@ -277,10 +236,7 @@
         </div>
 
         <label style="margin-top:12px;">Opisz dokładnie, co ma być wykonane (najważniejsze)</label>
-        <textarea
-          class="input"
-          name="Opis zakresu remontu"
-          required
+        <textarea class="input" name="Opis zakresu remontu" required
           placeholder="Napisz konkretnie:
 – co robimy w każdym pomieszczeniu
 – co demontujemy
@@ -294,12 +250,9 @@ Im więcej konkretu, tym dokładniejsze opracowanie."
         ></textarea>
 
         <label style="margin-top:12px;">Załączniki (PDF / projekt / zdjęcia) — najlepiej jako link</label>
-        <input
-          class="input"
-          type="url"
-          name="Załączniki (link)"
-          placeholder="Wklej link do Google Drive / Dropbox (ustaw dostęp: 'Każdy z linkiem')"
-        />
+        <input class="input" type="url" name="Załączniki (link)"
+          placeholder="Wklej link do Google Drive / Dropbox (ustaw dostęp: 'Każdy z linkiem')" />
+
         <p class="small" style="margin-top:8px;">
           Uwaga: w obecnej wersji strony (bez serwera) nie da się bezpiecznie przesłać pliku jako załącznik przez formularz i płatność.
           Najlepsza opcja to link do folderu/pliku (PDF, zdjęcia).
@@ -385,6 +338,10 @@ Im więcej konkretu, tym dokładniejsze opracowanie."
   <div class="container">
     <p class="small">
       Remont Control to serwis informacyjno-kontrolny. Nie jesteśmy stroną umowy i nie gwarantujemy kosztu ani rezultatu prac.
+      Widełki są orientacyjne i zależą od wielu czynników (miasto, metraż, stan, standard).
+    </p>
+    <p class="small" style="margin-top:8px;">
+      <a href="about.html">O serwisie</a> • <a href="terms.html">Zasady</a>
     </p>
   </div>
 </footer>
@@ -460,7 +417,8 @@ Im więcej konkretu, tym dokładniejsze opracowanie."
 </script>
 
 </body>
-</html
+</html>
+
 
 
 

@@ -420,3 +420,60 @@ select.input option{
 @media (max-width: 520px){
   .check-grid{ grid-template-columns: 1fr; }
 }
+/* ===== HEADER / NAV ===== */
+
+.nav.dark {
+  background: #0f172a; /* темний, не чорний */
+}
+
+.nav-inner {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Лого + текст */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+}
+
+/* Меню праворуч — трохи до центру */
+.menu {
+  margin-right: 10px;
+}
+
+/* Кнопка */
+.menu .btn {
+  margin-left: 8px;
+}
+
+/* МОБІЛКА */
+@media (max-width: 768px) {
+  .nav-inner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .logo-text {
+    font-size: 17px;
+  }
+
+  .menu {
+    gap: 10px;
+  }
+}

@@ -6,21 +6,6 @@
   <title>Płatność — Remont Control</title>
   <meta name="description" content="Płatność online za wybrany pakiet Remont Control." />
   <link rel="stylesheet" href="styles.css" />
-
-  <style>
-    .pay-wrap { max-width: 860px; margin: 0 auto; }
-    .pay-grid { display:grid; grid-template-columns: 1.2fr .8fr; gap: 14px; }
-    @media (max-width: 900px){ .pay-grid{ grid-template-columns: 1fr; } }
-
-    .kv { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.08); }
-    .kv:last-child{ border-bottom:none; }
-    .kv .k{ opacity:.85; }
-    .kv .v{ font-weight:600; text-align:right; }
-
-    .muted { opacity:.85; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; }
-    .smallgap { height:10px; }
-  </style>
 </head>
 
 <body>
@@ -102,7 +87,6 @@
           Tryb MVP (bez serwera): płatność realizujesz przez link płatności / checkout, a po sukcesie wracasz na stronę.
         </p>
 
-        <!-- 1) Put your payment links here (optional) -->
         <div class="notice" style="margin-top:12px;">
           <strong>Do podłączenia:</strong> wklej swój link płatności dla każdego pakietu w kodzie (sekcja <span class="mono">PAYMENT_LINKS</span>).
         </div>
@@ -118,7 +102,6 @@
 
         <hr class="divider" />
 
-        <!-- 2) DEMO / TEST (optional) -->
         <p class="small muted">
           Test: jeśli jeszcze nie masz płatności, możesz użyć przycisku poniżej do sprawdzenia wysyłki leadów.
         </p>
@@ -138,34 +121,28 @@
   <div class="container">
     <p class="small">
       Remont Control to serwis informacyjno-kontrolny. Nie jesteśmy stroną umowy i nie gwarantujemy kosztu ani rezultatu prac.
+      Widełki są orientacyjne i zależą od wielu czynników (miasto, metraż, stan, standard).
+    </p>
+    <p class="small" style="margin-top:8px;">
+      <a href="about.html">O serwisie</a> • <a href="terms.html">Zasady</a>
     </p>
   </div>
 </footer>
 
 <script>
 (function () {
-  // --- CONFIG ---
   const PRICES = { BASIC: "149 zł", PLUS: "299 zł", PREMIUM: "499 zł" };
 
-  // PAYMENT_LINKS:
-  // Вставиш сюди реальні лінки оплати, коли будуть (PayU/Przelewy24/Stripe Payment Link тощо)
-  // Можна залишити порожнім і користуватись Test mode.
   const PAYMENT_LINKS = {
-    BASIC: "",   // e.g. "https://buy.stripe.com/...."
+    BASIC: "",
     PLUS: "",
     PREMIUM: ""
   };
 
-  // FormSubmit endpoint (email receiver)
   const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/vanyakozar7@gmail.com";
-
-  // Where to go after "success" (we will send lead then redirect)
   const THANKS_URL = "thanks.html";
-
-  // localStorage key
   const STORAGE_KEY = "remontcontrol_lead";
 
-  // --- HELPERS ---
   function safeText(v){ return (v === undefined || v === null || v === "") ? "—" : String(v); }
 
   function getLead(){
@@ -179,7 +156,9 @@
   }
 
   function normalizePlan(lead){
-    const p = (lead && (lead["Wybrany pakiet"] || lead["Pakiet (wybór)"])) ? String(lead["Wybrany pakiet"] || lead["Pakiet (wybór)"]).toUpperCase() : "PLUS";
+    const p = (lead && (lead["Wybrany pakiet"] || lead["Pakiet (wybór)"]))
+      ? String(lead["Wybrany pakiet"] || lead["Pakiet (wybór)"]).toUpperCase()
+      : "PLUS";
     return (p === "BASIC" || p === "PLUS" || p === "PREMIUM") ? p : "PLUS";
   }
 
@@ -189,14 +168,12 @@
     document.getElementById("sumPrice").textContent = PRICES[plan] || "—";
     document.getElementById("sumEmail").textContent = safeText(lead && (lead["E-mail"] || lead["Email"]));
     document.getElementById("sumCity").textContent  = safeText(lead && (lead["Miasto / województwo"] || lead["Miasto"]));
-    document.getElementById("sumArea").textContent  = safeText(lead && (lead["Metraż (m²)"] || lead["Metraż (m²) "])) ;
+    document.getElementById("sumArea").textContent  = safeText(lead && lead["Metraż (m²)"]);
   }
 
   async function sendLeadToEmail(lead){
     if (!lead) throw new Error("No lead data");
 
-    // IMPORTANT: FormSubmit accepts normal form fields.
-    // We'll send as JSON (AJAX endpoint).
     const payload = {
       _subject: "Nowe zgłoszenie — Remont Control",
       _template: "table",
@@ -221,30 +198,22 @@
     window.location.href = THANKS_URL;
   }
 
-  // --- INIT ---
   const lead = getLead();
   fillSummary(lead);
 
   const plan = normalizePlan(lead);
 
-  // --- BUTTONS ---
   const payBtn = document.getElementById("payBtn");
   const testSendBtn = document.getElementById("testSendBtn");
 
-  // MVP flow:
-  // 1) If you have PAYMENT_LINK for selected plan -> go there.
-  // 2) If no link -> fallback: send lead and go to thanks (for now)
   payBtn.addEventListener("click", async function(){
     const link = (PAYMENT_LINKS[plan] || "").trim();
 
     if (link) {
-      // Redirect to real payment link.
-      // After payment you should configure provider to redirect back to: /payment_success.html (optional)
       window.location.href = link;
       return;
     }
 
-    // Fallback (no payment link yet): send now, then thanks
     payBtn.disabled = true;
     payBtn.textContent = "Wysyłam…";
 
@@ -258,7 +227,6 @@
     }
   });
 
-  // Test mode: always send + thanks
   testSendBtn.addEventListener("click", async function(){
     testSendBtn.disabled = true;
     testSendBtn.textContent = "Wysyłam…";

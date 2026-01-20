@@ -20,23 +20,55 @@ html,body{
 a{color:inherit;text-decoration:none}
 .container{max-width:1100px;margin:0 auto;padding:0 20px}
 
-/* ===== NAV ===== */
+/* ================================================================= */
+/* ============================== NAV ============================== */
+/* ================================================================= */
+
 .nav{
   position:sticky;
   top:0;
-  backdrop-filter:blur(10px);
-  background:rgba(7,11,20,.65);
-  border-bottom:1px solid var(--border);
   z-index:50;
+  backdrop-filter:blur(10px);
+  background:rgba(7,11,20,.65); /* як фон сайту */
+  border-bottom:1px solid var(--border);
 }
+
 .nav-inner{
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:14px 0;
+
+  /* Відступи від країв екрана, щоб не різало на мобільному */
+  padding-left: 24px;
+  padding-right: 24px;
 }
-.brand{font-weight:800;letter-spacing:.2px}
-.menu{display:flex;gap:14px;align-items:center}
+
+/* ONLY LOGO (картинка з текстом + галочка) */
+.brand{
+  display:flex;
+  align-items:center;
+}
+
+/* Твій logo.png НЕ повинен розтягуватися */
+.logo-main{
+  height: 30px;
+  width: auto;
+  max-width: 240px;
+  object-fit: contain;
+  display:block;
+}
+
+/* Меню */
+.menu{
+  display:flex;
+  gap:14px;
+  align-items:center;
+
+  /* щоб справа не липло до краю */
+  margin-right: 6px;
+}
+
 .menu a{
   padding:8px 10px;
   border-radius:10px;
@@ -47,7 +79,10 @@ a{color:inherit;text-decoration:none}
   color:var(--text);
 }
 
-/* ===== BUTTONS ===== */
+/* ================================================================= */
+/* ============================ BUTTONS ============================ */
+/* ================================================================= */
+
 .btn{
   display:inline-flex;
   align-items:center;
@@ -72,8 +107,12 @@ a{color:inherit;text-decoration:none}
   text-align:center;
 }
 
-/* ===== LAYOUT ===== */
+/* ================================================================= */
+/* ============================= LAYOUT ============================ */
+/* ================================================================= */
+
 .hero{padding:56px 0 26px}
+
 .hero-grid{
   display:grid;
   grid-template-columns:1.15fr .85fr;
@@ -107,12 +146,12 @@ a{color:inherit;text-decoration:none}
 
 .grid2{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:16px;
 }
 .grid3{
   display:grid;
-  grid-template-columns:1fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap:14px;
 }
 
@@ -143,7 +182,10 @@ a{color:inherit;text-decoration:none}
 }
 .footer .small{margin:0}
 
-/* ===== FORMS (GLOBAL, DARK) ===== */
+/* ================================================================= */
+/* ============================== FORMS ============================ */
+/* ================================================================= */
+
 .form label{
   display:block;
   font-size:13px;
@@ -178,102 +220,54 @@ textarea{
   color:var(--muted);
 }
 
-/* ===== PRICING ===== */
-.price-card{position:relative;text-align:left}
-.price{font-size:26px;font-weight:800;margin:6px 0 12px}
-.price-card.highlight{
-  border:2px solid rgba(255,255,255,.22);
+/* Selects dark */
+select.input{
+  background: rgba(255,255,255,.05);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  appearance: none;
 }
-.price-card .badge{
-  position:absolute;
-  top:-10px;
-  right:-10px;
-  background:#000;
-  color:#fff;
-  font-size:12px;
-  padding:4px 8px;
-  border-radius:6px;
+select.input option{
+  background: #0f1a30;
+  color: #eaf0ff;
 }
 
-/* ================================================================= */
-/* ===== CHECK PAGE — LIGHT, READABLE (STABLE VERSION) ===== */
-/* ================================================================= */
-
-.section.light{
-  background:#f6f7f9;
-}
-
-.section.light .card{
-  background:#ffffff;
-  color:#111;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
-
-.section.light .h1,
-.section.light .h2{
-  color:#111;
-}
-
-.section.light .small,
-.section.light label{
-  color:#444;
-}
-
-.section.light .input,
-.section.light select,
-.section.light textarea{
-  background:#ffffff;
-  border:1px solid #cfd4dc;
-  color:#111;
-  border-radius:8px;
-}
-
-.section.light .input:focus,
-.section.light select:focus,
-.section.light textarea:focus{
-  outline:none;
-  border-color:#000;
-}
-
-.section.light input[type="checkbox"],
-.section.light input[type="radio"]{
-  accent-color:#000;
-}
-
-.section.light .notice{
-  background:#eef1f6;
-  border-left:4px solid #000;
-  padding:12px 14px;
-  border-radius:8px;
-  color:#333;
-}
-
-.section.light hr{
+/* Divider on dark form */
+.check-dark .divider{
   border:none;
   height:1px;
-  background:rgba(0,0,0,.1);
-  margin:18px 0;
+  background: rgba(255,255,255,.12);
+  margin: 18px 0;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width:900px){
-  .hero-grid{grid-template-columns:1fr}
-  .grid3{grid-template-columns:1fr}
-  .grid2{grid-template-columns:1fr}
-  .h1{font-size:32px}
-  .menu{gap:6px}
-}
-.full { width: 100%; display: block; text-align: center; }
-
-.grid2{
+/* Checkbox grid (your current) */
+.check-grid{
   display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap:16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px 14px;
+  margin-top: 6px;
 }
-@media (max-width: 800px){
-  .grid2{ grid-template-columns: 1fr; }
+
+.check-dark input[type="checkbox"]{
+  accent-color: var(--accent2);
+  transform: scale(1.05);
+  margin-right: 8px;
 }
-/* ===== Pricing – comparison columns ===== */
+
+.check-grid label.small{
+  display:flex;
+  align-items:flex-start;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  border-radius: 12px;
+}
+
+/* ================================================================= */
+/* ============================= PRICING =========================== */
+/* ================================================================= */
 
 .pricing-grid{
   display:grid;
@@ -342,138 +336,103 @@ textarea{
   color:var(--muted);
 }
 
-.price-card .btn.full{
-  width:100%;
-  margin-top:10px;
-}
-
 .note{
   margin-top:14px;
   color:var(--muted);
 }
 
-/* Mobile */
-@media(max-width:900px){
-  .pricing-grid{
-    grid-template-columns:1fr;
-  }
-}
-/* ===== Check page: dark selects + readable options + 4-col grids ===== */
+/* ================================================================= */
+/* =========================== LIGHT SECTION ======================= */
+/* ================================================================= */
 
-/* Make all selects dark */
-select.input{
-  background: rgba(255,255,255,.05);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+.section.light{
+  background:#f6f7f9;
 }
 
-/* Options (works in most browsers; some OS may still render native) */
-select.input option{
-  background: #0f1a30;
-  color: #eaf0ff;
+.section.light .card{
+  background:#ffffff;
+  color:#111;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
-/* Divider on dark form */
-.check-dark .divider{
+.section.light .h1,
+.section.light .h2{
+  color:#111;
+}
+
+.section.light .small,
+.section.light label{
+  color:#444;
+}
+
+.section.light .input,
+.section.light select,
+.section.light textarea{
+  background:#ffffff;
+  border:1px solid #cfd4dc;
+  color:#111;
+  border-radius:8px;
+}
+
+.section.light .input:focus,
+.section.light select:focus,
+.section.light textarea:focus{
+  outline:none;
+  border-color:#000;
+}
+
+.section.light input[type="checkbox"],
+.section.light input[type="radio"]{
+  accent-color:#000;
+}
+
+.section.light .notice{
+  background:#eef1f6;
+  border-left:4px solid #000;
+  padding:12px 14px;
+  border-radius:8px;
+  color:#333;
+}
+
+.section.light hr{
   border:none;
   height:1px;
-  background: rgba(255,255,255,.12);
-  margin: 18px 0;
+  background:rgba(0,0,0,.1);
+  margin:18px 0;
 }
 
-/* Checkbox grid: 4 columns on desktop */
-.check-grid{
-  display:grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px 14px;
-  margin-top: 6px;
-}
+/* ================================================================= */
+/* ============================ RESPONSIVE ========================= */
+/* ================================================================= */
 
-.check-dark input[type="checkbox"]{
-  accent-color: var(--accent2);
-  transform: scale(1.05);
-  margin-right: 8px;
-}
-
-/* Make labels more readable */
-.check-grid label.small{
-  display:flex;
-  align-items:flex-start;
-  gap: 6px;
-  padding: 8px 10px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.04);
-  border-radius: 12px;
-}
-
-/* Responsive */
-@media (max-width: 1100px){
+@media (max-width:1100px){
   .check-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
-@media (max-width: 900px){
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .grid3{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  .pricing-grid{grid-template-columns:1fr}
+  .h1{font-size:32px}
+  .menu{gap:6px}
   .check-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .nav-inner{
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+  .logo-main{
+    height: 26px;
+    max-width: 200px;
+  }
 }
-@media (max-width: 520px){
+
+@media (max-width:520px){
   .check-grid{ grid-template-columns: 1fr; }
 }
-/* ===== HEADER / NAV ===== */
 
-.nav.dark {
-  background: #0f172a; /* темний, не чорний */
+@media (max-width:800px){
+  .grid2{ grid-template-columns: 1fr; }
 }
 
-.nav-inner {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-/* Лого + текст */
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.logo-icon {
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-}
-
-.logo-text {
-  font-size: 18px;
-  font-weight: 600;
-  color: #ffffff;
-  letter-spacing: 0.2px;
-}
-
-/* Меню праворуч — трохи до центру */
-.menu {
-  margin-right: 10px;
-}
-
-/* Кнопка */
-.menu .btn {
-  margin-left: 8px;
-}
-
-/* МОБІЛКА */
-@media (max-width: 768px) {
-  .nav-inner {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .logo-text {
-    font-size: 17px;
-  }
-
-  .menu {
-    gap: 10px;
-  }
-}

@@ -6,14 +6,27 @@
   <title>Płatność — Remont Control</title>
   <meta name="description" content="Płatność online za wybrany pakiet Remont Control." />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- FAVICON / APP ICONS -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body>
 
 <header class="nav">
   <div class="container nav-inner">
-    <a class="brand" href="./">
-      <img src="logo.png" alt="Remont Control" class="logo-main" />
+
+    <!-- LOGO (CSS, stacked like your PNG) -->
+    <a class="brand brand-stacked" href="./" aria-label="Remont Control">
+      <span class="logo-top">Remont</span>
+      <span class="logo-bottom">
+        <span class="logo-control">Control</span>
+        <span class="logo-check">✓</span>
+      </span>
     </a>
 
     <nav class="menu">
@@ -21,6 +34,7 @@
       <a href="terms.html">Zasady</a>
       <a class="btn" href="check.html">Sprawdź swój remont</a>
     </nav>
+
   </div>
 </header>
 
@@ -32,41 +46,85 @@
       <p class="lead">
         Sprawdź podsumowanie. Po opłaceniu zamówienia dostaniesz potwierdzenie i zaczynamy analizę.
       </p>
+      <p class="notice" style="margin-top:12px;">
+        Jeśli nie widzisz danych — wróć do formularza i wyślij go ponownie.
+      </p>
     </div>
   </section>
 
   <section class="section">
     <div class="pay-grid">
 
-      <!-- SUMMARY -->
+      <!-- LEFT: SUMMARY -->
       <div class="card">
         <h2 class="h2">Podsumowanie</h2>
 
-        <div class="kv"><div>Pakiet</div><div id="sumPlan">—</div></div>
-        <div class="kv"><div>Cena</div><div id="sumPrice">—</div></div>
-        <div class="kv"><div>E-mail</div><div id="sumEmail">—</div></div>
+        <div class="kv">
+          <div class="k">Pakiet</div>
+          <div class="v" id="sumPlan">—</div>
+        </div>
+        <div class="kv">
+          <div class="k">Cena</div>
+          <div class="v" id="sumPrice">—</div>
+        </div>
+        <div class="kv">
+          <div class="k">E-mail</div>
+          <div class="v" id="sumEmail">—</div>
+        </div>
+        <div class="kv">
+          <div class="k">Miasto</div>
+          <div class="v" id="sumCity">—</div>
+        </div>
+        <div class="kv">
+          <div class="k">Metraż</div>
+          <div class="v" id="sumArea">—</div>
+        </div>
 
-        <p class="small muted" style="margin-top:12px;">
-          Po płatności otrzymasz e-mail z potwierdzeniem.
+        <div class="smallgap"></div>
+
+        <p class="small muted">
+          Po płatności otrzymasz e-mail z potwierdzeniem oraz dalszymi instrukcjami.
+        </p>
+        <p class="small muted">
+          Uwaga: Remont Control nie wykonuje remontów i nie odpowiada za pracę wykonawcy.
         </p>
       </div>
 
-      <!-- PAYMENT -->
+      <!-- RIGHT: PAY -->
       <div class="card">
         <h2 class="h2">Opłać zamówienie</h2>
 
-        <button class="btn" id="payBtn" type="button">Opłać teraz</button>
+        <p class="small muted">
+          Tryb MVP (bez serwera): płatność realizujesz przez link płatności / checkout.
+          Jeśli linki nie są podpięte — przycisk wyśle zgłoszenie (testowo) i przeniesie do podziękowania.
+        </p>
+
+        <div class="notice" style="margin-top:12px;">
+          <strong>Do podłączenia:</strong> wklej swoje linki płatności w sekcji <span class="mono">PAYMENT_LINKS</span>.
+        </div>
+
+        <div style="margin-top:16px;">
+          <button class="btn" id="payBtn" type="button">Opłać teraz</button>
+          <a class="btn secondary" href="check.html" style="margin-left:10px;">Wróć</a>
+        </div>
+
+        <p class="small muted" style="margin-top:10px;">
+          Klikając „Opłać teraz” akceptujesz <a href="terms.html">zasady</a>.
+        </p>
 
         <hr class="divider" />
 
-        <!-- ✅ TEST BUTTON -->
+        <!-- ✅ TEST BUTTON (ALWAYS VISIBLE) -->
         <p class="small muted">
-          🔧 Tryb testowy (bez opłaty):
+          🔧 Test (bez opłaty): wyślij zgłoszenie na e-mail i przejdź dalej.
         </p>
         <button class="btn secondary" id="testSendBtn" type="button">
           Test: wyślij zgłoszenie bez płatności
         </button>
 
+        <p class="small muted" style="margin-top:10px;">
+          Przed reklamą usuń ten przycisk albo schowaj go.
+        </p>
       </div>
 
     </div>
@@ -77,65 +135,148 @@
 <footer class="footer">
   <div class="container">
     <p class="small">
-      Remont Control — serwis informacyjno-kontrolny.
+      Remont Control to serwis informacyjno-kontrolny. Nie jesteśmy stroną umowy i nie gwarantujemy kosztu ani rezultatu prac.
+      Widełki są orientacyjne i zależą od wielu czynników (miasto, metraż, stan, standard).
+    </p>
+    <p class="small" style="margin-top:8px;">
+      <a href="./">Strona główna</a> • <a href="about.html">O serwisie</a> • <a href="terms.html">Zasady</a>
     </p>
   </div>
 </footer>
 
 <script>
 (function () {
+  // =========================
+  // CONFIG
+  // =========================
+  const PRICES = { BASIC: "149 zł", PLUS: "299 zł", PREMIUM: "499 zł" };
 
-  const PRICES = { BASIC:"149 zł", PLUS:"299 zł", PREMIUM:"499 zł" };
+  // If link exists -> redirect to payment
+  // If empty -> fallback to send lead + thanks (MVP)
+  const PAYMENT_LINKS = {
+    BASIC: "",
+    PLUS: "",
+    PREMIUM: ""
+  };
+
+  // ✅ Your receiver email
   const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/remontcontrol.info@gmail.com";
+
+  // ✅ Your thanks page filename in repo
   const THANKS_URL = "thank-you.html";
+
+  // localStorage key
   const STORAGE_KEY = "remontcontrol_lead";
 
+  // =========================
+  // HELPERS
+  // =========================
+  function safeText(v){ return (v === undefined || v === null || v === "") ? "—" : String(v); }
+
   function getLead(){
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); }
-    catch(e){ return null; }
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch(e){
+      return null;
+    }
   }
 
   function normalizePlan(lead){
-    const p = (lead && (lead["Wybrany pakiet"] || lead["Pakiet (wybór)"])) || "PLUS";
-    return String(p).toUpperCase();
+    const pRaw = lead && (lead["Wybrany pakiet"] || lead["Pakiet (wybór)"]);
+    const p = pRaw ? String(pRaw).toUpperCase() : "PLUS";
+    return (p === "BASIC" || p === "PLUS" || p === "PREMIUM") ? p : "PLUS";
   }
 
-  async function sendLead(lead){
-    if (!lead) throw new Error("Brak danych formularza");
+  function fillSummary(lead){
+    const plan = normalizePlan(lead);
+    document.getElementById("sumPlan").textContent  = plan;
+    document.getElementById("sumPrice").textContent = PRICES[plan] || "—";
+    document.getElementById("sumEmail").textContent = safeText(lead && (lead["E-mail"] || lead["Email"]));
+    document.getElementById("sumCity").textContent  = safeText(lead && (lead["Miasto / województwo"] || lead["Miasto"]));
+    document.getElementById("sumArea").textContent  = safeText(lead && lead["Metraż (m²)"]);
+  }
+
+  async function sendLeadToEmail(lead){
+    if (!lead) throw new Error("Brak danych zgłoszenia. Wróć do check.html i wyślij formularz ponownie.");
+
+    const replyTo = (lead["E-mail"] || lead["Email"] || "").trim();
 
     const payload = {
       _subject: "Nowe zgłoszenie — Remont Control",
       _template: "table",
       _captcha: "false",
-      _replyto: lead["E-mail"] || "",
+      _replyto: replyTo,
       ...lead
     };
 
     const res = await fetch(FORMSUBMIT_ENDPOINT, {
-      method:"POST",
-      headers:{ "Content-Type":"application/json","Accept":"application/json" },
-      body:JSON.stringify(payload)
+      method: "POST",
+      headers: { "Content-Type":"application/json", "Accept":"application/json" },
+      body: JSON.stringify(payload)
     });
 
-    if (!res.ok) throw new Error("Błąd wysyłki");
+    if (!res.ok) {
+      const txt = await res.text().catch(()=> "");
+      throw new Error("Błąd wysyłki: " + res.status + " " + txt);
+    }
+    return true;
   }
 
+  function goThanks(){
+    window.location.href = THANKS_URL;
+  }
+
+  // =========================
+  // INIT
+  // =========================
   const lead = getLead();
+  fillSummary(lead);
   const plan = normalizePlan(lead);
 
-  document.getElementById("sumPlan").textContent = plan;
-  document.getElementById("sumPrice").textContent = PRICES[plan] || "—";
-  document.getElementById("sumEmail").textContent = lead?.["E-mail"] || "—";
+  const payBtn = document.getElementById("payBtn");
+  const testSendBtn = document.getElementById("testSendBtn");
 
-  document.getElementById("payBtn").onclick = async () => {
-    await sendLead(lead);
-    window.location.href = THANKS_URL;
-  };
+  // =========================
+  // ACTIONS
+  // =========================
+  payBtn.addEventListener("click", async function(){
+    const link = (PAYMENT_LINKS[plan] || "").trim();
 
-  document.getElementById("testSendBtn").onclick = async () => {
-    await sendLead(lead);
-    window.location.href = THANKS_URL;
-  };
+    if (link) {
+      window.location.href = link;
+      return;
+    }
+
+    // Fallback (no links yet): send + thanks
+    payBtn.disabled = true;
+    payBtn.textContent = "Wysyłam…";
+
+    try {
+      await sendLeadToEmail(lead);
+      goThanks();
+    } catch(e){
+      alert("Nie udało się wysłać zgłoszenia.\n\n" + e.message);
+      payBtn.disabled = false;
+      payBtn.textContent = "Opłać teraz";
+    }
+  });
+
+  // ✅ Test always visible
+  testSendBtn.addEventListener("click", async function(){
+    testSendBtn.disabled = true;
+    testSendBtn.textContent = "Wysyłam…";
+
+    try {
+      await sendLeadToEmail(lead);
+      goThanks();
+    } catch(e){
+      alert("Błąd wysyłki: " + e.message);
+      testSendBtn.disabled = false;
+      testSendBtn.textContent = "Test: wyślij zgłoszenie bez płatności";
+    }
+  });
 
 })();
 </script>

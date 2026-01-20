@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Płatność — Remont Control</title>
   <meta name="description" content="Płatność online za wybrany pakiet Remont Control." />
+  <link rel="stylesheet" href="styles.css" />
 
-  <!-- ===== FAVICON / APP ICONS ===== -->
+  <!-- FAVICON / APP ICONS -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="icon" href="/favicon.ico">
   <link rel="manifest" href="/site.webmanifest">
-
-  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
@@ -21,14 +20,14 @@
 <header class="nav">
   <div class="container nav-inner">
 
-    <!-- ONLY LOGO -->
+    <!-- LOGO (CSS variant A, stacked like PNG) -->
     <a class="brand brand-stacked" href="./" aria-label="Remont Control">
-  <span class="logo-top">Remont</span>
-  <span class="logo-bottom">
-    <span class="logo-control">Control</span>
-    <span class="logo-check">✓</span>
-  </span>
-</a>
+      <span class="logo-top">Remont</span>
+      <span class="logo-bottom">
+        <span class="logo-control">Control</span>
+        <span class="logo-check">✓</span>
+      </span>
+    </a>
 
     <nav class="menu">
       <a href="about.html">O serwisie</a>
@@ -114,13 +113,14 @@
 
         <hr class="divider" />
 
+        <!-- TEST (keep for now) -->
         <p class="small muted">
-          Test: jeśli jeszcze nie masz płatności, możesz użyć przycisku poniżej do sprawdzenia wysyłki leadów.
+          Test: jeśli jeszcze nie masz płatności, możesz użyć przycisku poniżej do sprawdzenia wysyłki leadów (bez opłaty).
         </p>
         <button class="btn secondary" id="testSendBtn" type="button">Test: wyślij zgłoszenie bez płatności</button>
 
         <p class="small muted" style="margin-top:10px;">
-          Ten przycisk jest tylko do testów — usuń go przed reklamą.
+          Ten przycisk jest tylko do testów — usuń go przed reklamą lub schowaj za parametrem <span class="mono">?test=1</span>.
         </p>
       </div>
 
@@ -136,25 +136,37 @@
       Widełki są orientacyjne i zależą od wielu czynników (miasto, metraż, stan, standard).
     </p>
     <p class="small" style="margin-top:8px;">
-      <a href="about.html">O serwisie</a> • <a href="terms.html">Zasady</a>
+      <a href="./">Strona główna</a> • <a href="about.html">O serwisie</a> • <a href="terms.html">Zasady</a>
     </p>
   </div>
 </footer>
 
 <script>
 (function () {
+  // =========================
+  // CONFIG
+  // =========================
   const PRICES = { BASIC: "149 zł", PLUS: "299 zł", PREMIUM: "499 zł" };
 
+  // PAYMENT LINKS (fill later)
   const PAYMENT_LINKS = {
-    BASIC: "",
+    BASIC: "",   // e.g. "https://buy.stripe.com/..."
     PLUS: "",
     PREMIUM: ""
   };
 
+  // ✅ YOUR EMAIL (FormSubmit)
   const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/remontcontrol.info@gmail.com";
-  const THANKS_URL = "thanks.html";
+
+  // ✅ Thanks page in your repo is: thank-you.html
+  const THANKS_URL = "thank-you.html";
+
+  // localStorage key
   const STORAGE_KEY = "remontcontrol_lead";
 
+  // =========================
+  // HELPERS
+  // =========================
   function safeText(v){ return (v === undefined || v === null || v === "") ? "—" : String(v); }
 
   function getLead(){
@@ -168,9 +180,8 @@
   }
 
   function normalizePlan(lead){
-    const p = (lead && (lead["Wybrany pakiet"] || lead["Pakiet (wybór)"]))
-      ? String(lead["Wybrany pakiet"] || lead["Pakiet (wybór)"]).toUpperCase()
-      : "PLUS";
+    const pRaw = lead && (lead["Wybrany pakiet"] || lead["Pakiet (wybór)"]);
+    const p = pRaw ? String(pRaw).toUpperCase() : "PLUS";
     return (p === "BASIC" || p === "PLUS" || p === "PREMIUM") ? p : "PLUS";
   }
 
@@ -184,12 +195,16 @@
   }
 
   async function sendLeadToEmail(lead){
-    if (!lead) throw new Error("No lead data");
+    if (!lead) throw new Error("Brak danych zgłoszenia (wróć do formularza check.html i wyślij ponownie).");
 
+    const replyTo = (lead["E-mail"] || lead["Email"] || "").trim();
+
+    // FormSubmit AJAX payload
     const payload = {
       _subject: "Nowe zgłoszenie — Remont Control",
       _template: "table",
       _captcha: "false",
+      _replyto: replyTo,
       ...lead
     };
 
@@ -201,7 +216,7 @@
 
     if (!res.ok) {
       const txt = await res.text().catch(()=> "");
-      throw new Error("Send failed: " + res.status + " " + txt);
+      throw new Error("Błąd wysyłki: " + res.status + " " + txt);
     }
     return true;
   }
@@ -210,6 +225,18 @@
     window.location.href = THANKS_URL;
   }
 
+  function hasTestParam(){
+    try{
+      const p = new URLSearchParams(window.location.search);
+      return p.get("test") === "1";
+    } catch(e){
+      return false;
+    }
+  }
+
+  // =========================
+  // INIT
+  // =========================
   const lead = getLead();
   fillSummary(lead);
 
@@ -218,6 +245,14 @@
   const payBtn = document.getElementById("payBtn");
   const testSendBtn = document.getElementById("testSendBtn");
 
+  // Hide test button unless ?test=1
+  if (!hasTestParam() && testSendBtn) {
+    testSendBtn.style.display = "none";
+  }
+
+  // =========================
+  // BUTTONS
+  // =========================
   payBtn.addEventListener("click", async function(){
     const link = (PAYMENT_LINKS[plan] || "").trim();
 
@@ -226,6 +261,7 @@
       return;
     }
 
+    // No payment link yet: treat as MVP send + thanks
     payBtn.disabled = true;
     payBtn.textContent = "Wysyłam…";
 
@@ -233,25 +269,28 @@
       await sendLeadToEmail(lead);
       goThanks();
     } catch(e){
-      alert("Nie udało się wysłać zgłoszenia. Wróć do formularza i spróbuj ponownie.\n\n" + e.message);
+      alert("Nie udało się wysłać zgłoszenia.\n\n" + e.message);
       payBtn.disabled = false;
       payBtn.textContent = "Opłać teraz";
     }
   });
 
-  testSendBtn.addEventListener("click", async function(){
-    testSendBtn.disabled = true;
-    testSendBtn.textContent = "Wysyłam…";
+  // Test mode: always send + thanks
+  if (testSendBtn) {
+    testSendBtn.addEventListener("click", async function(){
+      testSendBtn.disabled = true;
+      testSendBtn.textContent = "Wysyłam…";
 
-    try {
-      await sendLeadToEmail(lead);
-      goThanks();
-    } catch(e){
-      alert("Błąd wysyłki: " + e.message);
-      testSendBtn.disabled = false;
-      testSendBtn.textContent = "Test: wyślij zgłoszenie bez płatności";
-    }
-  });
+      try {
+        await sendLeadToEmail(lead);
+        goThanks();
+      } catch(e){
+        alert("Błąd wysyłki: " + e.message);
+        testSendBtn.disabled = false;
+        testSendBtn.textContent = "Test: wyślij zgłoszenie bez płatności";
+      }
+    });
+  }
 
 })();
 </script>

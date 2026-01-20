@@ -49,13 +49,6 @@ a{color:inherit;text-decoration:none}
   align-items:center;
 }
 
-.logo-main{
-  height: 30px;
-  width: auto;
-  max-width: 240px;
-  object-fit: contain;
-  display:block;
-}
 
 .menu{
   display:flex;
@@ -543,3 +536,4 @@ select.input option{
     font-size:18px;
   }
 }
+
